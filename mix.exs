@@ -32,7 +32,6 @@ defmodule WeatherGraphqlGateway.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:absinthe_plug, "~> 1.5"},
       {:absinthe, "~> 1.7", override: true},
       {:bandit, "~> 1.2"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
