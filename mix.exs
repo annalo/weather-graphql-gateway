@@ -9,7 +9,42 @@ defmodule WeatherGraphqlGateway.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+
+      # Docs
+      name: "MyApp",
+      source_url: "https://github.com/annalo/weather-graphql-gateway",
+      docs: [
+        main: "readme", # The main page in the docs
+        extras: extras(),
+        groups_for_extras: groups_for_extras(),
+        groups_for_modules: groups_for_modules()
+      ]
+    ]
+  end
+
+  # Configuration for the docs.
+  defp extras do
+    [
+      "README.md"
+    ]
+  end
+
+  defp groups_for_extras() do
+    [
+    ]
+  end
+
+  defp groups_for_modules do
+    [
+      GraphQL: [],
+      "Open Meteo API": [
+        WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest,
+        WeatherGraphqlGateway.OpenMeteoAPI.Models.Weather,
+        WeatherGraphqlGateway.OpenMeteoAPI.Models.CurrentWeather,
+        WeatherGraphqlGateway.OpenMeteoAPI.Models.HourlyWeather,
+        WeatherGraphqlGateway.OpenMeteoAPI.Models.DailyWeather
+      ]
     ]
   end
 
@@ -36,11 +71,13 @@ defmodule WeatherGraphqlGateway.MixProject do
       {:bandit, "~> 1.2"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dns_cluster, "~> 0.1.1"},
+      {:ex_doc, "~> 0.31", only: :dev, runtime: false},
       {:finch, "~> 0.13"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:phoenix, "~> 1.7.11"},
+      {:poison, "~> 5.0"},
       {:swoosh, "~> 1.5"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"}
