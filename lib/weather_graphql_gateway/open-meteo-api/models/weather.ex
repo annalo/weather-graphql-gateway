@@ -15,18 +15,6 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.Weather do
   - `hourly`: A map containing hourly forecast data.
   - `daily`: A map containing daily forecast data.
   """
-
-  @derive {Poison.Encoder, only: [
-    :utcOffsetSeconds,
-    :timezone,
-    :timezoneAbbreviation,
-    :latitude,
-    :longitude,
-    :current,
-    :hourly,
-    :daily,
-  ]}
-
   defstruct [
     :utcOffsetSeconds,
     :timezone,

@@ -33,17 +33,4 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.DailyWeather do
           temperature_2m_min: number(),
           weather_code: number()
         }
-
-  @impl Jason.Encoder
-  def encode(%DailyWeather{} = dw, opts) do
-    Jason.encode!(%{
-      "precipitation_probability_mean" => dw.precipitation_probability_mean,
-      "precipitation_sum" => dw.precipitation_sum,
-      "sunrise" => dw.sunrise,
-      "sunset" => dw.sunset,
-      "temperature_2m_max" => dw.temperature_2m_max,
-      "temperature_2m_min" => dw.temperature_2m_min,
-      "weather_code" => dw.weather_code
-    }, opts)
-  end
 end

@@ -20,22 +20,11 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.HourlyWeather do
     :weather_code
   ]
 
-  @type t :: %MODULE{
+  @type t :: %__MODULE__{
           is_day: [number()],
           precipitation_probability: [number()],
           temperature_2m: [number()],
           time: [String.t()],
           weather_code: [number()]
         }
-
-  @impl Jason.Encoder
-  def encode(%HourlyWeather{} = hw, opts) do
-    Jason.encode!(%{
-      "is_day" => hw.is_day,
-      "precipitation_probability" => hw.precipitation_probability,
-      "temperature_2m" => hw.temperature_2m,
-      "time" => hw.time,
-      "weather_code" => hw.weather_code
-    }, opts)
-  end
 end
