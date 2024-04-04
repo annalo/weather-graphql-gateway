@@ -6,13 +6,14 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.CurrentWeather do
 
   ## Fields
 
-  - `apparent_temperature`: The apparent temperature.
-  - `is_day`: Flag indicating if it's daytime.
-  - `precipitation`: The precipitation.
-  - `relative_humidity_2m`: The relative humidity at 2 meters above ground level.
-  - `temperature_2m`: The temperature at 2 meters above ground level.
-  - `weather_code`: The weather code representing the weather condition.
-  - `wind_speed_10m`: The wind speed at 10 meters above ground level.
+  - `apparent_temperature`: Perceived feels-like temperature combining wind chill factor, relative humidity and solar radiation. (C/F)
+  - `cloud_cover`: Total cloud cover as an area fraction. (in percentage)
+  - `is_day`: 1 if the current time step has daylight, 0 at night.
+  - `precipitation`: Total current precipitation (rain, showers, snow) sum. (mm/inch)
+  - `relative_humidity_2m`: The relative humidity at 2 meters above ground level. (in percentage)
+  - `temperature_2m`: The air temperature at 2 meters above ground level. (C/F)
+  - `weather_code`: Weather condition as a numeric code. Follow WMO weather interpretation codes.
+  - `wind_speed_10m`: The wind speed at 10 meters above ground level. 10 meters is the standard level. (km/h, mph, m/s, knots)
 
 """
   defstruct [

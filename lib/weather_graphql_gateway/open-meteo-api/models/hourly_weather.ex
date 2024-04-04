@@ -6,11 +6,11 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.HourlyWeather do
 
   ## Fields
 
-  - `is_day`: Flag indicating if it's daytime.
-  - `precipitation_probability`: The precipitation probability.
-  - `temperature_2m`: The temperature at 2 meters above ground level.
-  - `time`: The time of the hourly weather data.
-  - `weather_code`: The weather code representing the weather condition.
+  - `is_day`: 1 if the current time step has daylight, 0 at night.
+  - `precipitation_probability`: The precipitation probability. (in percentage)
+  - `temperature_2m`: The air temperature at 2 meters above ground level. (C/F)
+  - `time`: The time of the hourly weather data. (YYYY-MM-ddThh:mm i.e. "2024-01-01T00:00")
+  - `weather_code`: Weather condition as a numeric code. Follow WMO weather interpretation codes.
 """
   defstruct [
     :is_day,
