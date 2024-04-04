@@ -15,16 +15,6 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.CurrentWeather do
   - `wind_speed_10m`: The wind speed at 10 meters above ground level.
 
 """
-@derive {Poison.Encoder, only: [
-    :apparent_temperature,
-    :is_day,
-    :precipitation,
-    :relative_humidity_2m,
-    :temperature_2m,
-    :weather_code,
-    :wind_speed_10m
-  ]}
-
   defstruct [
     :apparent_temperature,
     :is_day,
@@ -44,4 +34,17 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.CurrentWeather do
     weather_code: number(),
     wind_speed_10m: number()
   }
+
+  @impl Jason.Encoder
+  def encode(%CurrentWeather{} = cw, opts) do
+    Jason.encode!(%{
+      "apparent_temperature" => cw.apparent_temperature,
+      "is_day" => cw.is_day,
+      "precipitation" => cw.precipitation,
+      "relative_humidity_2m" => cw.relative_humidity_2m,
+      "temperature_2m" => cw.temperature_2m,
+      "weather_code" => cw.weather_code,
+      "wind_speed_10m" => cw.wind_speed_10m
+    }, opts)
+  end
 end

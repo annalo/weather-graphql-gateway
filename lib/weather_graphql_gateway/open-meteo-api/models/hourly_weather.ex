@@ -12,14 +12,6 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.HourlyWeather do
   - `time`: The time of the hourly weather data.
   - `weather_code`: The weather code representing the weather condition.
 """
-  @derive {Poison.Encoder, only: [
-    :is_day,
-    :precipitation_probability,
-    :temperature_2m,
-    :time,
-    :weather_code
-  ]}
-
   defstruct [
     :is_day,
     :precipitation_probability,
@@ -35,4 +27,15 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.HourlyWeather do
           time: [String.t()],
           weather_code: [number()]
         }
+
+  @impl Jason.Encoder
+  def encode(%HourlyWeather{} = hw, opts) do
+    Jason.encode!(%{
+      "is_day" => hw.is_day,
+      "precipitation_probability" => hw.precipitation_probability,
+      "temperature_2m" => hw.temperature_2m,
+      "time" => hw.time,
+      "weather_code" => hw.weather_code
+    }, opts)
   end
+end
