@@ -21,10 +21,10 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.HourlyWeather do
   ]
 
   @type t :: %__MODULE__{
-          is_day: [number()],
-          precipitation_probability: [number()],
+          is_day: [integer()],
+          precipitation_probability: [integer()],
           temperature_2m: [number()],
           time: [String.t()],
-          weather_code: [number()]
+          weather_code: [integer()]
         }
 end
