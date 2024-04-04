@@ -11,7 +11,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.CurrentWeather do
   - `is_day`: 1 if the current time step has daylight, 0 at night.
   - `precipitation`: Total current precipitation (rain, showers, snow) sum. (mm/inch)
   - `relative_humidity_2m`: The relative humidity at 2 meters above ground level. (in percentage)
-  - `time`: Time the temperature was taken. 
+  - `time`: Time the temperature was taken.
   - `temperature_2m`: The air temperature at 2 meters above ground level. (C/F)
   - `weather_code`: Weather condition as a numeric code. Follow WMO weather interpretation codes.
   - `wind_speed_10m`: The wind speed at 10 meters above ground level. 10 meters is the standard level. (km/h, mph, m/s, knots)
@@ -39,6 +39,6 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.CurrentWeather do
     time: String.t(),
     temperature_2m: number(),
     weather_code: integer(),
-    wind_speed_10m: integer()
+    wind_speed_10m: number()
   }
 end
