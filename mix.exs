@@ -39,8 +39,8 @@ defmodule WeatherGraphqlGateway.MixProject do
     [
       GraphQL: [],
       "Open Meteo API": [
+        WeatherGraphqlGateway.OpenMeteoAPI.Client,
         WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest,
-        WeatherGraphqlGateway.OpenMeteoAPI.Models.Weather,
         WeatherGraphqlGateway.OpenMeteoAPI.Models.CurrentWeather,
         WeatherGraphqlGateway.OpenMeteoAPI.Models.HourlyWeather,
         WeatherGraphqlGateway.OpenMeteoAPI.Models.DailyWeather

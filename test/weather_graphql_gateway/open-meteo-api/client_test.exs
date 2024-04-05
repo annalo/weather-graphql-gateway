@@ -25,6 +25,15 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.ClientTest do
       assert response["hourly"]["precipitation_probability"] |> length() == 24
       assert response["daily"]["weather_code"] |> length() == 1
     end
+
+    test "handles error exception" do
+      request = %WeatherRequest{
+        latitude: 35.8317,
+        longitude: "asdf",
+      }
+      response = Client.get_weather(request)
+      assert response["reason"] == "Data corrupted at path ''. Cannot initialize Float from invalid String value asdf."
+    end
   end
 
   describe "Client.build_url" do
@@ -75,18 +84,4 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.ClientTest do
       assert query["temperature_unit"] == "fahrenheit"
     end
   end
-
-    # # Mock Req.get! for testing network errors
-    # test "handles network error" do
-    #   # Arrange
-    #   request = %WeatherRequest{latitude: 35.8317, longitude: -78.9286}
-    #   mock = fn _ -> {:error, :timeout} end
-
-    #   defdelegate WeatherGraphqlGateway.OpenMeteoAPI.Client.get_weather(request), to: mock
-
-    #   # Act
-    #   assert_raise TimeoutError do
-    #     WeatherGraphqlGateway.OpenMeteoAPI.Client.get_weather(request)
-    #   end
-    # end
 end
