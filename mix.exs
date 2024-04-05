@@ -72,11 +72,11 @@ defmodule WeatherGraphqlGateway.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dns_cluster, "~> 0.1.1"},
       {:ex_doc, "~> 0.31", only: :dev, runtime: false},
-      {:finch, "~> 0.13"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:phoenix, "~> 1.7.11"},
+      {:req, "~> 0.4.0"},
       {:swoosh, "~> 1.5"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"}

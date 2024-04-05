@@ -26,7 +26,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest do
           wind_speed_unit: String.t(),
           precipitation_unit: String.t(),
           timezone: String.t(),
-          forecast_days: integer(),
+          forecast_days: integer()
         }
 
   defstruct [
@@ -39,6 +39,6 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest do
     wind_speed_unit: "kmh",
     precipitation_unit: "mm",
     timezone: "auto",
-    forecast_days: 7
+    forecast_days: 1
   ]
 end

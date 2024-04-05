@@ -45,7 +45,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequestTest do
       assert request.wind_speed_unit == "kmh"
       assert request.precipitation_unit == "mm"
       assert request.timezone == "auto"
-      assert request.forecast_days == 7
+      assert request.forecast_days == 1
     end
   end
 end
