@@ -68,6 +68,7 @@ defmodule WeatherGraphqlGateway.MixProject do
   defp deps do
     [
       {:absinthe, "~> 1.7", override: true},
+      {:absinthe_plug, "~> 1.5"},
       {:bandit, "~> 1.2"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dns_cluster, "~> 0.1.1"},

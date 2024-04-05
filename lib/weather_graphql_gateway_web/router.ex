@@ -5,9 +5,18 @@ defmodule WeatherGraphqlGatewayWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", WeatherGraphqlGatewayWeb do
+  scope "/" do
     pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: WeatherGraphqlGateway.Schema,
+      interface: :simple,
+      context: %{pubsub: WeatherGraphqlGateway.Endpoint}
   end
+
+  # scope "/api", WeatherGraphqlGatewayWeb do
+  #   pipe_through :api
+  # end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:weather_graphql_gateway, :dev_routes) do
