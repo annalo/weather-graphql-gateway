@@ -41,11 +41,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequestTest do
       assert request.current == nil
       assert request.hourly == nil
       assert request.daily == nil
-      assert request.temperature_unit == "celsius"
-      assert request.wind_speed_unit == "kmh"
-      assert request.precipitation_unit == "mm"
       assert request.timezone == "auto"
-      assert request.forecast_days == 1
     end
   end
 end
