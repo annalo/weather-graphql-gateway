@@ -4,6 +4,17 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.ClientTest do
   alias WeatherGraphqlGateway.OpenMeteoAPI.Client
   alias WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest
 
+  describe "Client.get_weather" do
+    test "gets weather data for a valid request" do
+      request = %WeatherRequest{latitude: 35.8317, longitude: -78.9286}
+      {:ok, response} = Client.get_weather(request)
+
+      # Assert
+      assert Map.has_key?(response, :current_weather)
+      assert Map.has_key?(response, :daily)
+    end
+  end
+
   describe "Client.build_url" do
     test "with all parameters" do
       request = %WeatherRequest{
@@ -52,4 +63,18 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.ClientTest do
       assert query["temperature_unit"] == "fahrenheit"
     end
   end
+
+    # # Mock Req.get! for testing network errors
+    # test "handles network error" do
+    #   # Arrange
+    #   request = %WeatherRequest{latitude: 35.8317, longitude: -78.9286}
+    #   mock = fn _ -> {:error, :timeout} end
+
+    #   defdelegate WeatherGraphqlGateway.OpenMeteoAPI.Client.get_weather(request), to: mock
+
+    #   # Act
+    #   assert_raise TimeoutError do
+    #     WeatherGraphqlGateway.OpenMeteoAPI.Client.get_weather(request)
+    #   end
+    # end
 end
