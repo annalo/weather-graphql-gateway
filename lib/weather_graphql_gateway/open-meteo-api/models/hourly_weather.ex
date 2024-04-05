@@ -12,6 +12,14 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.HourlyWeather do
   - `time`: The time of the hourly weather data. (YYYY-MM-ddThh:mm i.e. "2024-01-01T00:00")
   - `weather_code`: Weather condition as a numeric code. Follow WMO weather interpretation codes.
 """
+  @type t :: %__MODULE__{
+          is_day: [integer()],
+          precipitation_probability: [integer()],
+          temperature_2m: [number()],
+          time: [String.t()],
+          weather_code: [integer()]
+        }
+
   defstruct [
     :is_day,
     :precipitation_probability,
@@ -20,11 +28,4 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.HourlyWeather do
     :weather_code
   ]
 
-  @type t :: %__MODULE__{
-          is_day: [integer()],
-          precipitation_probability: [integer()],
-          temperature_2m: [number()],
-          time: [String.t()],
-          weather_code: [integer()]
-        }
 end

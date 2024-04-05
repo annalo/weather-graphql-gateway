@@ -17,7 +17,18 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.CurrentWeather do
   - `wind_speed_10m`: The wind speed at 10 meters above ground level. 10 meters is the standard level. (km/h, mph, m/s, knots)
 
 """
-  @enforce_keys []
+@type t :: %__MODULE__{
+        apparent_temperature: number(),
+        cloud_cover: integer(),
+        is_day: integer(),
+        precipitation: integer(),
+        relative_humidity_2m: integer(),
+        time: String.t(),
+        temperature_2m: number(),
+        weather_code: integer(),
+        wind_speed_10m: number()
+      }
+
   defstruct [
     :apparent_temperature,
     :cloud_cover,
@@ -29,16 +40,4 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.CurrentWeather do
     :weather_code,
     :wind_speed_10m
   ]
-
-  @type t :: %__MODULE__{
-    apparent_temperature: number(),
-    cloud_cover: integer(),
-    is_day: integer(),
-    precipitation: integer(),
-    relative_humidity_2m: integer(),
-    time: String.t(),
-    temperature_2m: number(),
-    weather_code: integer(),
-    wind_speed_10m: number()
-  }
 end

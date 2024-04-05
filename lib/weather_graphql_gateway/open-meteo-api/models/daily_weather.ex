@@ -14,16 +14,6 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.DailyWeather do
     - `time`: The date of the weather.
     - `weather_code`: Weather condition as a numeric code. Follow WMO weather interpretation codes.
   """
-  defstruct [
-    :precipitation_probability_max,
-    :sunrise,
-    :sunset,
-    :temperature_2m_max,
-    :temperature_2m_min,
-    :time,
-    :weather_code
-  ]
-
   @type t :: %__MODULE__{
           precipitation_probability_max: [integer()],
           sunrise: [String.t()],
@@ -33,4 +23,14 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.DailyWeather do
           time: [String.t()],
           weather_code: [integer()]
         }
+
+  defstruct [
+    :precipitation_probability_max,
+    :sunrise,
+    :sunset,
+    :temperature_2m_max,
+    :temperature_2m_min,
+    :time,
+    :weather_code
+  ]
 end
