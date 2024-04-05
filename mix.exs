@@ -76,6 +76,7 @@ defmodule WeatherGraphqlGateway.MixProject do
       {:jason, "~> 1.2"},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:phoenix, "~> 1.7.11"},
+      {:plug_cowboy, "~> 2.0"},
       {:req, "~> 0.4.0"},
       {:swoosh, "~> 1.5"},
       {:telemetry_metrics, "~> 0.6"},
