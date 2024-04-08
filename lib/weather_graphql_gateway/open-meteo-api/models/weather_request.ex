@@ -17,15 +17,15 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest do
   """
   @enforce_keys [:latitude, :longitude]
   @type t :: %__MODULE__{
-          current: [String.t()],
-          daily: [String.t()],
-          forecast_days: integer(),
-          hourly: [String.t()],
+          current: [String.t()] | nil,
+          daily: [String.t()] | nil,
+          forecast_days: integer() | nil,
+          hourly: [String.t()] | nil,
           latitude: number(),
           longitude: number(),
-          precipitation_unit: String.t(),
-          temperature_unit: String.t(),
-          wind_speed_unit: String.t(),
+          precipitation_unit: String.t() | nil,
+          temperature_unit: String.t() | nil,
+          wind_speed_unit: String.t() | nil,
           timezone: String.t()
         }
 
