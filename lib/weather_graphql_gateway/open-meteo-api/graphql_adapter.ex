@@ -59,14 +59,23 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
   """
   @spec request_daily_weather(number(), number(), String.t(), String.t(), String.t(), integer()) :: nil
   def request_daily_weather(
-    _latitude,
-    _longitude,
-    _precipitation_unit,
-    _temperature_unit,
-    __wind_speed_unit,
-    _days
+    latitude,
+    longitude,
+    precipitation_unit,
+    temperature_unit,
+    wind_speed_unit,
+    forecast_days
   ) do
-
+    struct = %WeatherRequest{
+      latitude: latitude,
+      longitude: longitude,
+      precipitation_unit: precipitation_unit,
+      temperature_unit: temperature_unit,
+      wind_speed_unit: wind_speed_unit,
+      forecast_days: forecast_days,
+      daily: ["precipitation_probability_max", "sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "time", "weather_code"]
+    }
+    Client.get_weather(struct)
   end
 
   @doc """
@@ -87,13 +96,22 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
   """
   @spec request_hourly_weather(number(), number(), String.t(), String.t(), String.t(), integer()) :: nil
   def request_hourly_weather(
-    _latitude,
-    _longitude,
-    _precipitation_unit,
-    _temperature_unit,
-    __wind_speed_unit,
-    _hours
+    latitude,
+    longitude,
+    precipitation_unit,
+    temperature_unit,
+    wind_speed_unit,
+    forecast_days
   ) do
-
+    struct = %WeatherRequest{
+      latitude: latitude,
+      longitude: longitude,
+      precipitation_unit: precipitation_unit,
+      temperature_unit: temperature_unit,
+      wind_speed_unit: wind_speed_unit,
+      forecast_days: forecast_days,
+      hourly: ["is_day", "precipitation_probability", "temperature_2m", "time", "weather_code"]
+    }
+    Client.get_weather(struct)
   end
 end
