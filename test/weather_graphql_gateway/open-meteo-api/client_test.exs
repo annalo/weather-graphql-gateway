@@ -20,7 +20,6 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.ClientTest do
       assert response["longitude"] == -78.93414
       assert response["timezone"] == "America/New_York"
       assert response["timezone_abbreviation"] == "EDT"
-
       assert response["current"]["temperature_2m"] |> is_number() == true
       assert response["hourly"]["precipitation_probability"] |> length() == 24
       assert response["daily"]["weather_code"] |> length() == 1
