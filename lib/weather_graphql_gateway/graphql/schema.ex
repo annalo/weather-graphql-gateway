@@ -10,9 +10,9 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
   - `:wind_speed_unit`: Enum representing units for wind speed (km/h, m/s, mph, kn).
 
   ## Objects
-    - `:current`: Current weather data.
-    - `:daily`: Daily weather data.
-    - `:hourly`: Hourly weather data.
+  - `:current`: Current weather data.
+  - `:daily`: Daily weather data.
+  - `:hourly`: Hourly weather data.
   - `:weather`: Weather data.
 
   ## Queries
@@ -26,6 +26,7 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
     - `wind_speed_unit` (optional)
   """
   use Absinthe.Schema
+  alias WeatherGraphqlGateway.Graphql.Resolvers
 
   import_types Absinthe.Type.Custom
   import_types WeatherGraphqlGateway.Graphql.Schema.WeatherTypes
@@ -52,16 +53,22 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
 
   object :weather do
     @desc "Current weather data."
-    field :current, :current
+    field :current, :current do
+      resolve &Resolvers.CurrentWeather.get_data/3
+    end
+
     @desc "Daily weather data. Defaults to 7 days."
     field :daily, list_of(:daily) do
       @desc "Per default, only 7 days are returned. Up to 16 days of forecast are possible."
       arg :days, :integer
+      resolve &Resolvers.DailyWeather.get_data/3
     end
+
     @desc "Hourly data. Defaults to the next 24h."
     field :hourly, list_of(:hourly) do
       @desc "Per default, the next 24 hours are returned. Up to 16 days of forecast are possible."
       arg :hours, :integer
+      resolve &Resolvers.HourlyWeather.get_data/3
     end
   end
 
@@ -76,6 +83,8 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
       arg :temperature_unit, :temperature_unit
       @desc "The unit of measurement for wind speed. Defaults to kmh. (kmh, ms, mph, kn)"
       arg :wind_speed_unit, :wind_speed_unit
+
+      resolve &Resolvers.Weather.get_data/3
     end
   end
 end
