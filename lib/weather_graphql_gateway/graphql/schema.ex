@@ -30,7 +30,7 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
 
   import_types Absinthe.Type.Custom
   import_types WeatherGraphqlGateway.Graphql.Schema.WeatherTypes
-  import_types WeatherGraphqlGateway.Graphql.Schema.Enums
+  import_types WeatherGraphqlGateway.Graphql.Schema.EnumTypes
 
 
   object :weather do
@@ -65,7 +65,7 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
       arg :temperature_unit, :temperature_unit
       @desc "The unit of measurement for wind speed. Defaults to kmh. (kmh, ms, mph, kn)"
       arg :wind_speed_unit, :wind_speed_unit
-      
+
       resolve &Resolvers.Weather.get_data/3
     end
   end

@@ -4,6 +4,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
 
   It provides functions to translate GraphQL queries into requests to the OpenMeteoAPI and process the responses accordingly.
   """
+  alias WeatherGraphqlGateway.OpenMeteoAPI.Client
+  alias WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest
 
   @doc """
   Fetches current weather data for a specific location from the OpenMeteoAPI.
@@ -22,13 +24,21 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
   """
   @spec request_current_weather(number(), number(), String.t(), String.t(), String.t()) :: nil
   def request_current_weather(
-    _latitude,
-    _longitude,
-    _precipitation_unit,
-    _temperature_unit,
-    _wind_speed_unit
+    latitude,
+    longitude,
+    precipitation_unit,
+    temperature_unit,
+    wind_speed_unit
   ) do
-
+    struct = %WeatherRequest{
+      latitude: latitude,
+      longitude: longitude,
+      precipitation_unit: precipitation_unit,
+      temperature_unit: temperature_unit,
+      wind_speed_unit: wind_speed_unit,
+      current: ["apparent_temperature", "cloud_cover", "is_day", "precipitation", "relative_humidity_2m", "time", "temperature_2m", "weather_code", "wind_speed_10m"]
+    }
+    Client.get_weather(struct)
   end
 
   @doc """
