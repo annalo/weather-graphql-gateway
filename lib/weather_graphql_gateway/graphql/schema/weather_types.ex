@@ -1,4 +1,7 @@
 defmodule WeatherGraphqlGateway.Graphql.Schema.WeatherTypes do
+  @moduledoc """
+  This module defines GraphQL object types representing different weather data types.
+  """
   use Absinthe.Schema.Notation
 
   object :daily do

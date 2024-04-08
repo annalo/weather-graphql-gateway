@@ -4,12 +4,12 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest do
 
   ## Parameters
 
+  - `latitude`: The latitude coordinate for the location.
+  - `longitude`: The longitude coordinate for the location.
   - `current`: (optional) Whether to include current weather data. Defaults to true.
   - `daily`: (optional) A list of weather variables to get daily conditions.
   - `forecast_days`: (optional) The number of days to include in the forecast. Defaults to 7.
   - `hourly`: (optional) A list of hourly weather variables which should be returned.
-  - `latitude`: The latitude coordinate for the location.
-  - `longitude`: The longitude coordinate for the location.
   - `precipitation_unit`: (optional) The unit of measurement for precipitation. Defaults to mm. (mm/inch)
   - `temperature_unit`: (optional) The unit of measurement for temperature. Defaults to Celsius. (celsius/fahrenheit)
   - `wind_speed_unit`: (optional) The unit of measurement for wind speed. Defaults to kmh. (kmh, ms, mph, kn)

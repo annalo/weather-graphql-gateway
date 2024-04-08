@@ -1,4 +1,30 @@
 defmodule WeatherGraphqlGateway.Graphql.Schema do
+  @moduledoc """
+  This module defines the GraphQL schema for fetching weather data.
+
+  The schema provides queries for retrieving current, hourly, and daily weather data.
+
+  ## Enums
+  - `:precipitation_unit`: Enum representing units for precipitation (mm, inch).
+  - `:temperature_unit`: Enum representing units for temperature (Celsius, Fahrenheit).
+  - `:wind_speed_unit`: Enum representing units for wind speed (km/h, m/s, mph, kn).
+
+  ## Objects
+    - `:current`: Current weather data.
+    - `:daily`: Daily weather data.
+    - `:hourly`: Hourly weather data.
+  - `:weather`: Weather data.
+
+  ## Queries
+  - `weather`: Query for retrieving weather data.
+
+  #### Arguments
+    - `latitude`
+    - `longitude`
+    - `precipitation_unit` (optional)
+    - `temperature_unit` (optional)
+    - `wind_speed_unit` (optional)
+  """
   use Absinthe.Schema
 
   import_types Absinthe.Type.Custom
@@ -19,27 +45,28 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
   enum :wind_speed_unit do
     description "The wind speed unit"
     value :kmh, description: "khm"
-    value :ms, description: "ms"
-    value :mph, description: "mph"
     value :kn, description: "kn"
+    value :mph, description: "mph"
+    value :ms, description: "ms"
   end
 
   object :weather do
-    @desc "Daily weather data for the specified `forecast_days` field. Defaults to 7 days."
+    @desc "Current weather data."
+    field :current, :current
+    @desc "Daily weather data. Defaults to 7 days."
     field :daily, list_of(:daily) do
       @desc "Per default, only 7 days are returned. Up to 16 days of forecast are possible."
       arg :days, :integer
     end
-    @desc "Hourly data for the day (24h)."
+    @desc "Hourly data. Defaults to the next 24h."
     field :hourly, list_of(:hourly) do
       @desc "Per default, the next 24 hours are returned. Up to 16 days of forecast are possible."
       arg :hours, :integer
     end
-    @desc "Current weather data."
-    field :current, :current
   end
 
   query do
+    @desc "Weather data"
     field :weather, :weather do
       arg :latitude, non_null(:float)
       arg :longitude, non_null(:float)
