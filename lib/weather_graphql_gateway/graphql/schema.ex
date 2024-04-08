@@ -21,9 +21,9 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
   #### Arguments
     - `latitude`
     - `longitude`
-    - `precipitation_unit` (optional)
-    - `temperature_unit` (optional)
-    - `wind_speed_unit` (optional)
+    - `precipitation_unit`
+    - `temperature_unit`
+    - `wind_speed_unit`
   """
   use Absinthe.Schema
   alias WeatherGraphqlGateway.Graphql.Resolvers
@@ -60,11 +60,11 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
       arg :latitude, non_null(:float)
       arg :longitude, non_null(:float)
       @desc "The unit of measurement for precipitation. Defaults to mm. (mm/inch)"
-      arg :precipitation_unit, :precipitation_unit
+      arg :precipitation_unit, non_null(:precipitation_unit)
       @desc "The unit of measurement for temperature. Defaults to Celsius. (celsius/fahrenheit)"
-      arg :temperature_unit, :temperature_unit
+      arg :temperature_unit, non_null(:temperature_unit)
       @desc "The unit of measurement for wind speed. Defaults to kmh. (kmh, ms, mph, kn)"
-      arg :wind_speed_unit, :wind_speed_unit
+      arg :wind_speed_unit, non_null(:wind_speed_unit)
 
       resolve &Resolvers.Weather.get_data/3
     end
