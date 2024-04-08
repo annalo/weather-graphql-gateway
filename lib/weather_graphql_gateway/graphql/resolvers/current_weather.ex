@@ -1,6 +1,14 @@
 defmodule WeatherGraphqlGateway.Graphql.Resolvers.CurrentWeather do
+  @moduledoc """
+  This module contains resolver function for fetching current weather data in GraphQL queries.
+  """
   alias WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter
 
+  @doc """
+  Fetches current weather data based on the provided parameters.
+
+  This resolver function calls the `OpenMeteoApi.GraphqlAdapter.request_current_weather/5` function to fetch current weather data from the OpenMeteoAPI.
+  """
   @spec get_data(
           atom()
           | %{

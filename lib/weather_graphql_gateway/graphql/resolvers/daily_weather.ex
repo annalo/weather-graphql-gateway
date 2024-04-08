@@ -1,6 +1,14 @@
 defmodule WeatherGraphqlGateway.Graphql.Resolvers.DailyWeather do
+  @moduledoc """
+  This module contains resolver function for fetching daily weather data in GraphQL queries.
+  """
   alias WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter
 
+  @doc """
+  Fetches daily weather data based on the provided parameters.
+
+  This resolver function calls the `OpenMeteoApi.GraphqlAdapter.request_daily_weather/6` function to fetch daily weather data from the OpenMeteoAPI.
+  """
   @spec get_data(
           atom()
           | %{
