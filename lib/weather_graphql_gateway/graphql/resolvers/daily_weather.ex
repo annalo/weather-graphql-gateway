@@ -18,17 +18,17 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.DailyWeather do
               :temperature_unit => String.t(),
               :wind_speed_unit => String.t()
             },
-          %{:days => integer()},
+          %{:forecast_days => integer()},
           any()
         ) :: nil
-  def get_data(parent, %{days: days}, _resolution) do
+  def get_data(parent, %{forecast_days: forecast_days}, _resolution) do
     GraphqlAdapter.request_daily_weather(
       parent.latitude,
       parent.longitude,
       parent.precipitation_unit,
       parent.temperature_unit,
       parent.wind_speed_unit,
-      days
+      forecast_days || 7
     )
   end
 end

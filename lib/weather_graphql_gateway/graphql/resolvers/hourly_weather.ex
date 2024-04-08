@@ -14,22 +14,22 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.HourlyWeather do
           | %{
               :latitude => number(),
               :longitude => number(),
-              :precipitation_unit => binary(),
-              :temperature_unit => binary(),
-              :wind_speed_unit => binary(),
+              :precipitation_unit => String.t(),
+              :temperature_unit => String.t(),
+              :wind_speed_unit => String.t(),
               optional(any()) => any()
             },
-          %{:hours => integer()},
+          %{:forecast_days => integer()},
           any()
         ) :: nil
-  def get_data(parent, %{hours: hours}, _resolution) do
+  def get_data(parent, %{forecast_days: forecast_days}, _resolution) do
     GraphqlAdapter.request_hourly_weather(
       parent.latitude,
       parent.longitude,
       parent.precipitation_unit,
       parent.temperature_unit,
       parent.wind_speed_unit,
-      hours
+      forecast_days || 1
     )
   end
 end

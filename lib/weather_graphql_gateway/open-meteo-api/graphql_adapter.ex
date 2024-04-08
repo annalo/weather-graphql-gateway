@@ -26,19 +26,19 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
   def request_current_weather(
     latitude,
     longitude,
-    precipitation_unit,
     temperature_unit,
+    precipitation_unit,
     wind_speed_unit
   ) do
     struct = %WeatherRequest{
       latitude: latitude,
       longitude: longitude,
-      precipitation_unit: precipitation_unit,
       temperature_unit: temperature_unit,
+      precipitation_unit: precipitation_unit,
       wind_speed_unit: wind_speed_unit,
-      current: ["apparent_temperature", "cloud_cover", "is_day", "precipitation", "relative_humidity_2m", "time", "temperature_2m", "weather_code", "wind_speed_10m"]
+      current: ["apparent_temperature", "cloud_cover", "is_day", "precipitation", "relative_humidity_2m", "temperature_2m", "weather_code", "wind_speed_10m"]
     }
-    Client.get_weather(struct)
+    Client.get_weather(struct)["current"]
   end
 
   @doc """
@@ -49,8 +49,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
   `latitude`: The latitude of the location.
   `longitude`: The longitude of the location.
   `days`: The number of days of forecast data to fetch.
-  `precipitation_unit`: The unit of measurement for precipitation. Defaults to mm. (mm/inch)
   `temperature_unit`: The unit of measurement for temperature. Defaults to Celsius. (celsius/fahrenheit)
+  `precipitation_unit`: The unit of measurement for precipitation. Defaults to mm. (mm/inch)
   `wind_speed_unit`: The unit of measurement for wind speed. Defaults to km/h. (kmh, ms, mph, kn)
 
   ## Returns:
@@ -61,21 +61,21 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
   def request_daily_weather(
     latitude,
     longitude,
-    precipitation_unit,
     temperature_unit,
+    precipitation_unit,
     wind_speed_unit,
     forecast_days
   ) do
     struct = %WeatherRequest{
       latitude: latitude,
       longitude: longitude,
-      precipitation_unit: precipitation_unit,
       temperature_unit: temperature_unit,
+      precipitation_unit: precipitation_unit,
       wind_speed_unit: wind_speed_unit,
       forecast_days: forecast_days,
-      daily: ["precipitation_probability_max", "sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "time", "weather_code"]
+      daily: ["precipitation_probability_max", "sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "weather_code"]
     }
-    Client.get_weather(struct)
+    Client.get_weather(struct)["daily"]
   end
 
   @doc """
@@ -98,20 +98,20 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
   def request_hourly_weather(
     latitude,
     longitude,
-    precipitation_unit,
     temperature_unit,
+    precipitation_unit,
     wind_speed_unit,
     forecast_days
   ) do
     struct = %WeatherRequest{
       latitude: latitude,
       longitude: longitude,
-      precipitation_unit: precipitation_unit,
       temperature_unit: temperature_unit,
+      precipitation_unit: precipitation_unit,
       wind_speed_unit: wind_speed_unit,
       forecast_days: forecast_days,
-      hourly: ["is_day", "precipitation_probability", "temperature_2m", "time", "weather_code"]
+      hourly: ["is_day", "precipitation_probability", "temperature_2m", "weather_code"]
     }
-    Client.get_weather(struct)
+    Client.get_weather(struct)["hourly"]
   end
 end
