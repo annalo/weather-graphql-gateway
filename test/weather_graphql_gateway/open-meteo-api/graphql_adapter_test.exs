@@ -62,12 +62,14 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapterTest do
         forecast_days: 1,
         fields: ["is_day", "precipitation_probability", "temperature_2m", "weather_code"]
       })
+      first = Enum.at(request, 0)
 
-      assert request.is_day |> length() == 24
-      assert request.precipitation_probability |> length() == 24
-      assert request.temperature_2m |> length() == 24
-      assert request.time |> length() == 24
-      assert request.weather_code |> length() == 24
+      assert length(request) == 24
+      assert first.is_day |> is_integer() == true
+      assert first.precipitation_probability |> is_integer() == true
+      assert first.temperature_2m |> is_number() == true
+      assert first.time |> is_binary() == true
+      assert first.weather_code |> is_integer() == true
     end
   end
 end

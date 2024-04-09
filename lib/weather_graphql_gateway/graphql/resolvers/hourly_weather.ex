@@ -23,7 +23,7 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.HourlyWeather do
           any()
         ) :: nil
   def get_data(parent, %{forecast_days: forecast_days}, _resolution) do
-    _response = GraphqlAdapter.request_hourly_weather(%{
+    response = GraphqlAdapter.request_hourly_weather(%{
       forecast_days: forecast_days,
       latitude: parent.latitude,
       longitude: parent.longitude,
@@ -32,6 +32,6 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.HourlyWeather do
       wind_speed_unit: parent.wind_speed_unit,
       fields: ["is_day", "precipitation_probability", "temperature_2m", "weather_code"]
     })
-    {:ok, []}
+    {:ok, response}
   end
 end

@@ -146,6 +146,8 @@ def request_current_weather(%{
       wind_speed_unit: wind_speed_unit,
       hourly: fields
     }
-    Client.get_weather(struct)["hourly"] |> atomize()
+    Client.get_weather(struct)["hourly"]
+      |> atomize()
+      |> serialize_hourly_weather()
   end
 end
