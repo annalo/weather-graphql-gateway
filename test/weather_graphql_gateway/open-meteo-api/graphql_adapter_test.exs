@@ -10,7 +10,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapterTest do
         longitude: -78.85654,
         temperature_unit: "fahrenheit",
         precipitation_unit: "inch",
-        wind_speed_unit: "mph"
+        wind_speed_unit: "mph",
+        fields: ["apparent_temperature", "cloud_cover", "is_day", "precipitation", "relative_humidity_2m", "temperature_2m", "weather_code", "wind_speed_10m"]
       })
 
       assert request.apparent_temperature |> is_number == true
@@ -34,7 +35,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapterTest do
         temperature_unit: "celsius",
         precipitation_unit: "mm",
         wind_speed_unit: "kmh",
-        forecast_days: 7
+        forecast_days: 7,
+        fields: ["precipitation_probability_max", "sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "weather_code"]
       })
 
       assert request.precipitation_probability_max |> length() == 7
@@ -55,7 +57,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapterTest do
         temperature_unit: "fahrenheit",
         precipitation_unit: "inch",
         wind_speed_unit: "mph",
-        forecast_days: 1
+        forecast_days: 1,
+        fields: ["is_day", "precipitation_probability", "temperature_2m", "weather_code"]
       })
 
       assert request.is_day |> length() == 24

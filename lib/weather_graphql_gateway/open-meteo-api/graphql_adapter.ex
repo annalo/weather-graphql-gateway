@@ -29,14 +29,16 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
   longitude: number(),
   precipitation_unit: String.t(),
   temperature_unit: String.t(),
-  wind_speed_unit: String.t()
+  wind_speed_unit: String.t(),
+  fields: [String.t()]
 }) :: nil
 def request_current_weather(%{
   latitude: latitude,
   longitude: longitude,
   precipitation_unit: precipitation_unit,
   temperature_unit: temperature_unit,
-  wind_speed_unit: wind_speed_unit
+  wind_speed_unit: wind_speed_unit,
+  fields: fields
 }) do
     struct = %WeatherRequest{
       latitude: latitude,
@@ -44,7 +46,7 @@ def request_current_weather(%{
       temperature_unit: temperature_unit,
       precipitation_unit: precipitation_unit,
       wind_speed_unit: wind_speed_unit,
-      current: ["apparent_temperature", "cloud_cover", "is_day", "precipitation", "relative_humidity_2m", "temperature_2m", "weather_code", "wind_speed_10m"]
+      current: fields
     }
 
     Client.get_weather(struct)["current"] |> atomize()
@@ -120,7 +122,8 @@ def request_current_weather(%{
     longitude: number(),
     precipitation_unit: String.t(),
     temperature_unit: String.t(),
-    wind_speed_unit: String.t()
+    wind_speed_unit: String.t(),
+    fields: [String.t()]
   }) :: nil
   def request_hourly_weather(%{
     forecast_days: forecast_days,
@@ -128,7 +131,8 @@ def request_current_weather(%{
     longitude: longitude,
     precipitation_unit: precipitation_unit,
     temperature_unit: temperature_unit,
-    wind_speed_unit: wind_speed_unit
+    wind_speed_unit: wind_speed_unit,
+    fields: fields
   }) do
     struct = %WeatherRequest{
       forecast_days: forecast_days,
@@ -137,7 +141,7 @@ def request_current_weather(%{
       precipitation_unit: precipitation_unit,
       temperature_unit: temperature_unit,
       wind_speed_unit: wind_speed_unit,
-      hourly: ["is_day", "precipitation_probability", "temperature_2m", "weather_code"]
+      hourly: fields
     }
     Client.get_weather(struct)["hourly"] |> atomize()
   end

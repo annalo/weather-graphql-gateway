@@ -22,15 +22,16 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.DailyWeather do
           %{:forecast_days => integer()},
           any()
         ) :: nil
-  def get_data(_parent, _args, _resolution) do
-    # response = GraphqlAdapter.request_daily_weather(%{
-    #   forecast_days: args.forecast_days,
-    #   latitude: parent.latitude,
-    #   longitude: parent.longitude,
-    #   precipitation_unit: parent.precipitation_unit,
-    #   temperature_unit: parent.temperature_unit,
-    #   wind_speed_unit: parent.wind_speed_unit
-    # })
+  def get_data(parent, args, _resolution) do
+    _response = GraphqlAdapter.request_daily_weather(%{
+      forecast_days: args.forecast_days,
+      latitude: parent.latitude,
+      longitude: parent.longitude,
+      precipitation_unit: parent.precipitation_unit,
+      temperature_unit: parent.temperature_unit,
+      wind_speed_unit: parent.wind_speed_unit,
+      fields: ["precipitation_probability_max", "sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "weather_code"]
+    })
     {:ok, []}
   end
 end
