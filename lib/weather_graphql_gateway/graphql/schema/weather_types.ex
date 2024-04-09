@@ -29,7 +29,7 @@ defmodule WeatherGraphqlGateway.Graphql.Schema.WeatherTypes do
     @desc "1 if the current time step has daylight, 0 at night."
     field :is_day, :integer
     @desc "Total current precipitation (rain, showers, snow) sum. (mm/inch)"
-    field :precipitation, :integer
+    field :precipitation, :float
     @desc "The relative humidity. (in percentage)"
     field :relative_humidity_2m, :integer
     @desc "Time the temperature was taken."

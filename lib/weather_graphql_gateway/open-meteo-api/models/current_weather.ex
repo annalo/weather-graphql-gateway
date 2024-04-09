@@ -21,7 +21,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.CurrentWeather do
         apparent_temperature: number(),
         cloud_cover: integer(),
         is_day: integer(),
-        precipitation: integer(),
+        precipitation: number(),
         relative_humidity_2m: integer(),
         time: String.t(),
         temperature_2m: number(),
