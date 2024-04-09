@@ -30,7 +30,16 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.CurrentWeather do
       temperature_unit: parent.temperature_unit,
       precipitation_unit: parent.precipitation_unit,
       wind_speed_unit: parent.wind_speed_unit,
-      fields: ["apparent_temperature", "cloud_cover", "is_day", "precipitation", "relative_humidity_2m", "temperature_2m", "weather_code", "wind_speed_10m"]
+      fields: [
+        "apparent_temperature",
+        "cloud_cover",
+        "is_day",
+        "precipitation",
+        "relative_humidity_2m",
+        "temperature_2m",
+        "weather_code",
+        "wind_speed_10m"
+      ]
     })
 
     # Logger.debug("CURRENT WEATHER RESOLVER")

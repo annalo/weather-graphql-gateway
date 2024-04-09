@@ -30,7 +30,14 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.DailyWeather do
       precipitation_unit: parent.precipitation_unit,
       temperature_unit: parent.temperature_unit,
       wind_speed_unit: parent.wind_speed_unit,
-      fields: ["precipitation_probability_max", "sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "weather_code"]
+      fields: [
+        "precipitation_probability_max",
+        "sunrise",
+        "sunset",
+        "temperature_2m_max",
+        "temperature_2m_min",
+        "weather_code"
+      ]
     })
     {:ok, response}
   end

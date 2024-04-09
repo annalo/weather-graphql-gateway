@@ -30,7 +30,12 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.HourlyWeather do
       precipitation_unit: parent.precipitation_unit,
       temperature_unit: parent.temperature_unit,
       wind_speed_unit: parent.wind_speed_unit,
-      fields: ["is_day", "precipitation_probability", "temperature_2m", "weather_code"]
+      fields: [
+        "is_day",
+        "precipitation_probability",
+        "temperature_2m",
+        "weather_code"
+      ]
     })
     {:ok, response}
   end
