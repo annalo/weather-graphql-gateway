@@ -2,7 +2,7 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.HourlyWeather do
   @moduledoc """
   This module contains resolver function for fetching hourly weather data in GraphQL queries.
   """
-  # alias WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter
+  alias WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter
 
   @doc """
   Fetches hourly weather data based on the provided parameters.

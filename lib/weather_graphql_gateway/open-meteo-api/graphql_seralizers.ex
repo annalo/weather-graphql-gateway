@@ -1,4 +1,9 @@
 defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlSerializer do
+  def atomize(map) do
+    map
+    |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
+  end
+
   def serialize_daily_weather(%{
     precipitation_probability_max: precipitation_probability_max,
     sunrise: sunrise,

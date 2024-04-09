@@ -8,6 +8,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
   """
   alias WeatherGraphqlGateway.OpenMeteoAPI.Client
   alias WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest
+  import WeatherGraphqlGateway.OpenMeteoApi.GraphqlSerializer
 
   @doc """
   Fetches current weather data for a specific location from the OpenMeteoAPI.
@@ -97,7 +98,9 @@ def request_current_weather(%{
       wind_speed_unit: wind_speed_unit,
       daily: ["precipitation_probability_max", "sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "weather_code"]
     }
-    Client.get_weather(struct)["daily"] |> atomize()
+    Client.get_weather(struct)["daily"]
+      |> atomize()
+      |> serialize_daily_weather()
   end
 
   @doc """
@@ -144,10 +147,5 @@ def request_current_weather(%{
       hourly: fields
     }
     Client.get_weather(struct)["hourly"] |> atomize()
-  end
-
-  defp atomize(map) do
-    map
-    |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
   end
 end
