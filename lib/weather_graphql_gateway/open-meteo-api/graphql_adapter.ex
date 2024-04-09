@@ -47,7 +47,7 @@ def request_current_weather(%{
       current: ["apparent_temperature", "cloud_cover", "is_day", "precipitation", "relative_humidity_2m", "temperature_2m", "weather_code", "wind_speed_10m"]
     }
 
-    Client.get_weather(struct).body["current"] |> atomize()
+    Client.get_weather(struct)["current"] |> atomize()
 
     # Logger.debug("GRAPHQL ADAPTER WEATHER RESPONSE BODY")
     # Logger.debug("#{weather}")
@@ -95,7 +95,7 @@ def request_current_weather(%{
       wind_speed_unit: wind_speed_unit,
       daily: ["precipitation_probability_max", "sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "weather_code"]
     }
-    Client.get_weather(struct).body["daily"] |> atomize()
+    Client.get_weather(struct)["daily"] |> atomize()
   end
 
   @doc """
@@ -139,7 +139,7 @@ def request_current_weather(%{
       wind_speed_unit: wind_speed_unit,
       hourly: ["is_day", "precipitation_probability", "temperature_2m", "weather_code"]
     }
-    Client.get_weather(struct).body["hourly"] |> atomize()
+    Client.get_weather(struct)["hourly"] |> atomize()
   end
 
   defp atomize(map) do

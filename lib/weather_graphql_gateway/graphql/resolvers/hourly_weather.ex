@@ -2,7 +2,7 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.HourlyWeather do
   @moduledoc """
   This module contains resolver function for fetching hourly weather data in GraphQL queries.
   """
-  alias WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter
+  # alias WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter
 
   @doc """
   Fetches hourly weather data based on the provided parameters.
@@ -17,13 +17,12 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.HourlyWeather do
               :longitude => number(),
               :precipitation_unit => String.t(),
               :temperature_unit => String.t(),
-              :wind_speed_unit => String.t(),
-              optional(any()) => any()
+              :wind_speed_unit => String.t()
             },
           %{:forecast_days => integer()},
           any()
         ) :: nil
-  def get_data(parent, %{forecast_days: forecast_days}, _resolution) do
+  def get_data(_parent, %{forecast_days: _forecast_days}, _resolution) do
     # response = GraphqlAdapter.request_hourly_weather(%{
     #   forecast_days: forecast_days,
     #   latitude: parent.latitude,

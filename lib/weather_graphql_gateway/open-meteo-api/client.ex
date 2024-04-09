@@ -65,9 +65,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Client do
   """
   @spec handle_response({:ok, Req.Response.t()}) :: %{}
   @spec handle_response({:error, Exception.t()}) :: Exception.t()
-  def handle_response({:ok, response}) do
-    response
-  end
+  def handle_response({:ok, response}), do: response.body
   def handle_response({:error, exception}), do: exception
 
   @spec params(WeatherRequest.t()) :: %{}

@@ -2,7 +2,7 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.DailyWeather do
   @moduledoc """
   This module contains resolver function for fetching daily weather data in GraphQL queries.
   """
-  alias WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter
+  # alias WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter
 
   @doc """
   Fetches daily weather data based on the provided parameters.
@@ -22,7 +22,7 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.DailyWeather do
           %{:forecast_days => integer()},
           any()
         ) :: nil
-  def get_data(parent, args, _resolution) do
+  def get_data(_parent, _args, _resolution) do
     # response = GraphqlAdapter.request_daily_weather(%{
     #   forecast_days: args.forecast_days,
     #   latitude: parent.latitude,
