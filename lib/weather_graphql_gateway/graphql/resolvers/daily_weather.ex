@@ -12,6 +12,7 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.DailyWeather do
   @spec get_data(
           atom()
           | %{
+              :forecast_days => integer(),
               :latitude => number(),
               :longitude => number(),
               :precipitation_unit => String.t(),
@@ -22,13 +23,14 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.DailyWeather do
           any()
         ) :: nil
   def get_data(parent, %{forecast_days: forecast_days}, _resolution) do
-    GraphqlAdapter.request_daily_weather(
-      parent.latitude,
-      parent.longitude,
-      parent.precipitation_unit,
-      parent.temperature_unit,
-      parent.wind_speed_unit,
-      forecast_days || 7
-    )
+    response = GraphqlAdapter.request_daily_weather(%{
+      forecast_days: forecast_days,
+      latitude: parent.latitude,
+      longitude: parent.longitude,
+      precipitation_unit: parent.precipitation_unit,
+      temperature_unit: parent.temperature_unit,
+      wind_speed_unit: parent.wind_speed_unit
+    })
+    {:ok, response}
   end
 end

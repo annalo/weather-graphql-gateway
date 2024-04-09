@@ -24,13 +24,13 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.CurrentWeather do
           any()
         ) :: nil
   def get_data(parent, _args, _resolution) do
-    response = GraphqlAdapter.request_current_weather(
-      parent.latitude,
-      parent.longitude,
-      parent.temperature_unit,
-      parent.precipitation_unit,
-      parent.wind_speed_unit
-    )
+    response = GraphqlAdapter.request_current_weather(%{
+      latitude: parent.latitude,
+      longitude: parent.longitude,
+      temperature_unit: parent.temperature_unit,
+      precipitation_unit: parent.precipitation_unit,
+      wind_speed_unit: parent.wind_speed_unit
+    })
 
     faked = %{
       apparent_temperature: 63.5,

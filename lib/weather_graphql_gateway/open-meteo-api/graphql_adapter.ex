@@ -24,14 +24,20 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
 
   A map containing the current weather data retrieved from the OpenMeteoAPI.
   """
-  @spec request_current_weather(number(), number(), String.t(), String.t(), String.t()) :: nil
-def request_current_weather(
-    latitude,
-    longitude,
-    temperature_unit,
-    precipitation_unit,
-    wind_speed_unit
-  ) do
+@spec request_current_weather(%{
+  latitude: number(),
+  longitude: number(),
+  precipitation_unit: String.t(),
+  temperature_unit: String.t(),
+  wind_speed_unit: String.t()
+}) :: nil
+def request_current_weather(%{
+  latitude: latitude,
+  longitude: longitude,
+  precipitation_unit: precipitation_unit,
+  temperature_unit: temperature_unit,
+  wind_speed_unit: wind_speed_unit
+}) do
     struct = %WeatherRequest{
       latitude: latitude,
       longitude: longitude,
@@ -64,25 +70,32 @@ def request_current_weather(
 
   A map containing the daily weather data retrieved from the OpenMeteoAPI.
   """
-  @spec request_daily_weather(number(), number(), String.t(), String.t(), String.t(), integer()) :: nil
-  def request_daily_weather(
-    latitude,
-    longitude,
-    temperature_unit,
-    precipitation_unit,
-    wind_speed_unit,
-    forecast_days
-  ) do
+  @spec request_daily_weather(%{
+    forecast_days: integer(),
+    latitude: number(),
+    longitude: number(),
+    precipitation_unit: String.t(),
+    temperature_unit: String.t(),
+    wind_speed_unit: String.t()
+  }) :: nil
+  def request_daily_weather(%{
+    forecast_days: forecast_days,
+    latitude: latitude,
+    longitude: longitude,
+    precipitation_unit: precipitation_unit,
+    temperature_unit: temperature_unit,
+    wind_speed_unit: wind_speed_unit
+  }) do
     struct = %WeatherRequest{
+      forecast_days: forecast_days,
       latitude: latitude,
       longitude: longitude,
-      temperature_unit: temperature_unit,
       precipitation_unit: precipitation_unit,
+      temperature_unit: temperature_unit,
       wind_speed_unit: wind_speed_unit,
-      forecast_days: forecast_days,
       daily: ["precipitation_probability_max", "sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "weather_code"]
     }
-    Client.get_weather(struct)["daily"] |> atomize()
+    Client.get_weather(struct).body["daily"] |> atomize()
   end
 
   @doc """
@@ -101,25 +114,32 @@ def request_current_weather(
 
   A map containing the hourly weather data retrieved from the OpenMeteoAPI.
   """
-  @spec request_hourly_weather(number(), number(), String.t(), String.t(), String.t(), integer()) :: nil
-  def request_hourly_weather(
-    latitude,
-    longitude,
-    temperature_unit,
-    precipitation_unit,
-    wind_speed_unit,
-    forecast_days
-  ) do
+  @spec request_hourly_weather(%{
+    forecast_days: integer(),
+    latitude: number(),
+    longitude: number(),
+    precipitation_unit: String.t(),
+    temperature_unit: String.t(),
+    wind_speed_unit: String.t()
+  }) :: nil
+  def request_hourly_weather(%{
+    forecast_days: forecast_days,
+    latitude: latitude,
+    longitude: longitude,
+    precipitation_unit: precipitation_unit,
+    temperature_unit: temperature_unit,
+    wind_speed_unit: wind_speed_unit
+  }) do
     struct = %WeatherRequest{
+      forecast_days: forecast_days,
       latitude: latitude,
       longitude: longitude,
-      temperature_unit: temperature_unit,
       precipitation_unit: precipitation_unit,
+      temperature_unit: temperature_unit,
       wind_speed_unit: wind_speed_unit,
-      forecast_days: forecast_days,
       hourly: ["is_day", "precipitation_probability", "temperature_2m", "weather_code"]
     }
-    Client.get_weather(struct)["hourly"] |> atomize()
+    Client.get_weather(struct).body["hourly"] |> atomize()
   end
 
   defp atomize(map) do
