@@ -32,12 +32,15 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.Weather do
       wind_speed_unit: wind_speed_unit
     },
     _resolution) do
-      %{
-        latitude: latitude,
-        longitude: longitude,
-        precipitation_unit: precipitation_unit,
-        temperature_unit: temperature_unit,
-        wind_speed_unit: wind_speed_unit
+      {
+        :ok,
+        %{
+          latitude: latitude,
+          longitude: longitude,
+          precipitation_unit: precipitation_unit,
+          temperature_unit: temperature_unit,
+          wind_speed_unit: wind_speed_unit
+        }
       }
   end
 end

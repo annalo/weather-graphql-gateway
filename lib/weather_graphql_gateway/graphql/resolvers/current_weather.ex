@@ -1,4 +1,6 @@
 defmodule WeatherGraphqlGateway.Graphql.Resolvers.CurrentWeather do
+  require Logger
+
   @moduledoc """
   This module contains resolver function for fetching current weather data in GraphQL queries.
   """
@@ -22,12 +24,43 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.CurrentWeather do
           any()
         ) :: nil
   def get_data(parent, _args, _resolution) do
-    GraphqlAdapter.request_current_weather(
+    response = GraphqlAdapter.request_current_weather(
       parent.latitude,
       parent.longitude,
-      parent.precipitation_unit,
       parent.temperature_unit,
+      parent.precipitation_unit,
       parent.wind_speed_unit
     )
+
+    faked = %{
+      apparent_temperature: 63.5,
+      cloud_cover: 100,
+      interval: 900,
+      is_day: 1,
+      precipitation: 0.0,
+      relative_humidity_2m: 83,
+      temperature_2m: 64.3,
+      time: "2024-04-09T15:00",
+      weather_code: 3,
+      wind_speed_10m: 9.2
+    }
+
+    faked2 = %{
+      "apparent_temperature" => 64.4,
+      "cloud_cover" => 100,
+      "interval" => 900,
+      "is_day" => 1,
+      "precipitation" => 0.0,
+      "relative_humidity_2m" => 81,
+      "temperature_2m" => 65.3,
+      "time" => "2024-04-09T15:15",
+      "weather_code" => 3,
+      "wind_speed_10m" => 9.6
+    }
+
+    # Logger.debug("CURRENT WEATHER RESOLVER")
+    # Logger.debug("#{response}")
+
+    {:ok, response}
   end
 end

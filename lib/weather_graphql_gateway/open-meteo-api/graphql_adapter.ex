@@ -1,4 +1,6 @@
 defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
+  require Logger
+
   @moduledoc """
   This module serves as an adapter for interfacing with the OpenMeteoAPI to fulfill GraphQL requests.
 
@@ -23,7 +25,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
   A map containing the current weather data retrieved from the OpenMeteoAPI.
   """
   @spec request_current_weather(number(), number(), String.t(), String.t(), String.t()) :: nil
-  def request_current_weather(
+def request_current_weather(
     latitude,
     longitude,
     temperature_unit,
@@ -38,7 +40,12 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
       wind_speed_unit: wind_speed_unit,
       current: ["apparent_temperature", "cloud_cover", "is_day", "precipitation", "relative_humidity_2m", "temperature_2m", "weather_code", "wind_speed_10m"]
     }
-    Client.get_weather(struct)["current"]
+
+    Client.get_weather(struct).body["current"] |> atomize()
+
+    # Logger.debug("GRAPHQL ADAPTER WEATHER RESPONSE BODY")
+    # Logger.debug("#{weather}")
+    # weather
   end
 
   @doc """
@@ -75,7 +82,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
       forecast_days: forecast_days,
       daily: ["precipitation_probability_max", "sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "weather_code"]
     }
-    Client.get_weather(struct)["daily"]
+    Client.get_weather(struct)["daily"] |> atomize()
   end
 
   @doc """
@@ -112,6 +119,11 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
       forecast_days: forecast_days,
       hourly: ["is_day", "precipitation_probability", "temperature_2m", "weather_code"]
     }
-    Client.get_weather(struct)["hourly"]
+    Client.get_weather(struct)["hourly"] |> atomize()
+  end
+
+  defp atomize(map) do
+    map
+    |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
   end
 end
