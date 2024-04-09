@@ -34,18 +34,21 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
 
 
   object :weather do
+    field :latitude, :float
+    field :longitude, :float
+    field :precipitation_unit, :string
+    field :temperature_unit, :string
+    field :wind_speed_unit, :string
     @desc "Current weather data."
     field :current, :current do
       resolve &Resolvers.CurrentWeather.get_data/3
     end
-
     @desc "Daily weather data. Defaults to 7 days."
     field :daily, list_of(:daily) do
       @desc "Per default, only 7 days are returned. Up to 16 days of forecast are possible."
       arg :forecast_days, :integer, default_value: 7
       resolve &Resolvers.DailyWeather.get_data/3
     end
-
     @desc "Hourly data. Defaults to today's 24h."
     field :hourly, list_of(:hourly) do
       @desc "Per default, today's 24h is returned. Up to 16 days of forecast are possible."
