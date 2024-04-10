@@ -19,11 +19,11 @@ Usage:
 
 ### GraphQL Playground
 
-Access the GraphQL playground directly at https://weather-graphql-gateway.fly.dev/ to test your GraphQL queries visually.
+Access the GraphQL playground directly at https://open-meteo-graphql.fly.dev/ to test your GraphQL queries visually.
 
 ### GraphQL Endpoint
 
-You can query the GraphQL endpoint at https://weather-graphql-gateway.fly.dev/graphql. 
+You can query the GraphQL endpoint at https://open-meteo-graphql.fly.dev/. 
 
 Example:
 
