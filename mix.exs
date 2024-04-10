@@ -70,7 +70,7 @@ defmodule WeatherGraphqlGateway.MixProject do
       {:absinthe, "~> 1.7", override: true},
       {:absinthe_plug, "~> 1.5"},
       {:bandit, "~> 1.2"},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dns_cluster, "~> 0.1.1"},
       {:ex_doc, "~> 0.31", only: :dev, runtime: false},
       {:gettext, "~> 0.20"},

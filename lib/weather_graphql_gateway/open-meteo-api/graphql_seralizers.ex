@@ -1,9 +1,37 @@
 defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlSerializer do
+  @moduledoc """
+  Provides functions to serialize weather data received from OpenMeteoAPI responses.
+
+  This module offers functionalities to transform weather data obtained from the OpenMeteoAPI into a format suitable for GraphQL responses. It includes functions to:
+      * Convert map keys to atoms (`atomize/1`)
+      * Serialize daily weather data (`serialize_daily_weather/1`)
+      * Serialize hourly weather data (`serialize_hourly_weather/1`)
+
+  """
+  
+  @doc """
+  Converts map keys to atoms.
+  """
+  @spec atomize(map()) :: map()
   def atomize(map) do
     map
     |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
   end
 
+  @doc """
+    Serializes daily weather data into a list of maps.
+
+    This function takes a map containing daily weather data and transforms it into a list of maps, where each inner map represents the weather for a single day.
+  """
+  @spec serialize_daily_weather(%{
+          :precipitation_probability_max => integer(),
+          :sunrise => String.t(),
+          :sunset => String.t(),
+          :temperature_2m_max => number(),
+          :temperature_2m_min => number(),
+          :time => list(String.t()),
+          :weather_code => integer()
+        }) :: list(%{})
   def serialize_daily_weather(%{
         precipitation_probability_max: precipitation_probability_max,
         sunrise: sunrise,
@@ -26,6 +54,18 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlSerializer do
     end
   end
 
+  @doc """
+  Serializes hourly weather data into a list of maps.
+
+  This function takes a map containing hourly weather data and transforms it into a list of maps, where each inner map represents the weather for a single hour.
+  """
+  @spec serialize_hourly_weather(%{
+          :is_day => integer(),
+          :precipitation_probability => integer(),
+          :temperature_2m => number(),
+          :time => String.t(),
+          :weather_code => integer()
+        }) :: list(%{})
   def serialize_hourly_weather(%{
         is_day: is_day,
         precipitation_probability: precipitation_probability,
