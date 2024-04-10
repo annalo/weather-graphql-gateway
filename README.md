@@ -21,11 +21,7 @@ Usage:
 
 Access the GraphQL playground directly at https://open-meteo-graphql.fly.dev to test your GraphQL queries visually.
 
-### GraphQL Endpoint
-
-You can query the GraphQL endpoint at https://open-meteo-graphql.fly.dev. 
-
-Example:
+### Example
 
 ```graphql
 query {
@@ -39,3 +35,7 @@ query {
   }
 }
 ```
+
+### GraphQL Endpoint
+
+You can query the GraphQL endpoint at https://open-meteo-graphql.fly.dev.
