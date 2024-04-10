@@ -1,6 +1,4 @@
 defmodule WeatherGraphqlGateway.Graphql.Resolvers.CurrentWeather do
-  require Logger
-
   @moduledoc """
   This module contains resolver function for fetching current weather data in GraphQL queries.
   """
@@ -51,9 +49,6 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.CurrentWeather do
         "wind_speed_10m"
       ]
     })
-
-    # Logger.debug("CURRENT WEATHER RESOLVER")
-    # Logger.debug("#{response}")
 
     {:ok, response}
   end

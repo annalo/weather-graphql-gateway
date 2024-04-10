@@ -1,6 +1,4 @@
 defmodule WeatherGraphqlGateway.OpenMeteoAPI.Client do
-  require Logger
-
   @moduledoc """
   A module for interacting with the Open Meteo API.
 

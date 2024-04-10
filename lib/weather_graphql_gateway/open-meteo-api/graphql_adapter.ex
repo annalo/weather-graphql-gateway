@@ -1,6 +1,4 @@
 defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
-  require Logger
-
   @moduledoc """
   This module serves as an adapter for interfacing with the OpenMeteoAPI to fulfill GraphQL requests.
 
@@ -49,12 +47,7 @@ def request_current_weather(%{
       wind_speed_unit: wind_speed_unit,
       current: fields
     }
-
     Client.get_weather(struct)["current"] |> atomize()
-
-    # Logger.debug("GRAPHQL ADAPTER WEATHER RESPONSE BODY")
-    # Logger.debug("#{weather}")
-    # weather
   end
 
   @doc """

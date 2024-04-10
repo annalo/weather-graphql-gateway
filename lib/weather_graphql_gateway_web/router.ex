@@ -8,13 +8,17 @@ defmodule WeatherGraphqlGatewayWeb.Router do
   scope "/" do
     pipe_through :api
 
-    forward "/api", Absinthe.Plug,
-      schema: WeatherGraphqlGateway.Graphql.Schema,
-      context: %{pubsub: WeatherGraphqlGateway.Endpoint}
-
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: WeatherGraphqlGateway.Graphql.Schema,
       interface: :simple,
+      context: %{pubsub: WeatherGraphqlGateway.Endpoint}
+  end
+
+  scope "/api" do
+    pipe_through :api
+
+    forward "/", Absinthe.Plug,
+      schema: WeatherGraphqlGateway.Graphql.Schema,
       context: %{pubsub: WeatherGraphqlGateway.Endpoint}
   end
 
