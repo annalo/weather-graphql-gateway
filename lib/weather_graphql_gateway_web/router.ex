@@ -14,7 +14,7 @@ defmodule WeatherGraphqlGatewayWeb.Router do
       context: %{pubsub: WeatherGraphqlGateway.Endpoint}
   end
 
-  scope "/api" do
+  scope "/graphql" do
     pipe_through :api
 
     forward "/", Absinthe.Plug,
