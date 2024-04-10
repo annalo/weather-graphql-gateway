@@ -8,7 +8,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlSerializer do
       * Serialize hourly weather data (`serialize_hourly_weather/1`)
 
   """
-  
+
   @doc """
   Converts map keys to atoms.
   """
