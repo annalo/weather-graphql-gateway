@@ -8,9 +8,25 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequestTest do
       request = %WeatherRequest{
         latitude: 35.7326,
         longitude: 78.8503,
-        current: ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "is_day", "precipitation", "weather_code", "cloud_cover", "wind_speed_10m"],
+        current: [
+          "temperature_2m",
+          "relative_humidity_2m",
+          "apparent_temperature",
+          "is_day",
+          "precipitation",
+          "weather_code",
+          "cloud_cover",
+          "wind_speed_10m"
+        ],
         hourly: ["temperature_2m", "precipitation_probability", "weather_code", "is_day"],
-        daily: ["weather_code", "temperature_2m_max", "temperature_2m_min", "sunrise", "sunset", "precipitation_probability_max"],
+        daily: [
+          "weather_code",
+          "temperature_2m_max",
+          "temperature_2m_min",
+          "sunrise",
+          "sunset",
+          "precipitation_probability_max"
+        ],
         temperature_unit: "fahrenheit",
         wind_speed_unit: "mph",
         precipitation_unit: "inch",
@@ -20,9 +36,34 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequestTest do
 
       assert request.latitude == 35.7326
       assert request.longitude == 78.8503
-      assert request.current == ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "is_day", "precipitation", "weather_code", "cloud_cover", "wind_speed_10m"]
-      assert request.hourly == ["temperature_2m", "precipitation_probability", "weather_code", "is_day"]
-      assert request.daily == ["weather_code", "temperature_2m_max", "temperature_2m_min", "sunrise", "sunset", "precipitation_probability_max"]
+
+      assert request.current == [
+               "temperature_2m",
+               "relative_humidity_2m",
+               "apparent_temperature",
+               "is_day",
+               "precipitation",
+               "weather_code",
+               "cloud_cover",
+               "wind_speed_10m"
+             ]
+
+      assert request.hourly == [
+               "temperature_2m",
+               "precipitation_probability",
+               "weather_code",
+               "is_day"
+             ]
+
+      assert request.daily == [
+               "weather_code",
+               "temperature_2m_max",
+               "temperature_2m_min",
+               "sunrise",
+               "sunset",
+               "precipitation_probability_max"
+             ]
+
       assert request.temperature_unit == "fahrenheit"
       assert request.wind_speed_unit == "mph"
       assert request.precipitation_unit == "inch"
@@ -33,7 +74,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequestTest do
     test "can create a CurrentWeather struct without optional fields" do
       request = %WeatherRequest{
         latitude: 35.7326,
-        longitude: 78.8503,
+        longitude: 78.8503
       }
 
       assert request.latitude == 35.7326

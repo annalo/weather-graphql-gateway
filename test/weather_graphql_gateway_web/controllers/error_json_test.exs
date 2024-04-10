@@ -2,7 +2,9 @@ defmodule WeatherGraphqlGatewayWeb.ErrorJSONTest do
   use WeatherGraphqlGatewayWeb.ConnCase, async: true
 
   test "renders 404" do
-    assert WeatherGraphqlGatewayWeb.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
+    assert WeatherGraphqlGatewayWeb.ErrorJSON.render("404.json", %{}) == %{
+             errors: %{detail: "Not Found"}
+           }
   end
 
   test "renders 500" do

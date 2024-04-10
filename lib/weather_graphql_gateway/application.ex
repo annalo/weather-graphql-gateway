@@ -9,7 +9,8 @@ defmodule WeatherGraphqlGateway.Application do
   def start(_type, _args) do
     children = [
       WeatherGraphqlGatewayWeb.Telemetry,
-      {DNSCluster, query: Application.get_env(:weather_graphql_gateway, :dns_cluster_query) || :ignore},
+      {DNSCluster,
+       query: Application.get_env(:weather_graphql_gateway, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: WeatherGraphqlGateway.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: WeatherGraphqlGateway.Finch},

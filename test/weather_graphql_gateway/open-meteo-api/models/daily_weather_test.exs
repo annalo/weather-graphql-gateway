@@ -28,7 +28,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.DailyWeatherTest do
       daily_weather = %DailyWeather{
         temperature_2m_max: [54.8, 58.7, 57.5],
         temperature_2m_min: [42.7, 38.7, 35],
-        time: ["2024-01-01", "2024-01-02", "2024-01-03"],
+        time: ["2024-01-01", "2024-01-02", "2024-01-03"]
       }
 
       assert daily_weather.temperature_2m_min == [42.7, 38.7, 35]

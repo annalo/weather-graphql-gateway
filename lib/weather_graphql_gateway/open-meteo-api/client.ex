@@ -49,7 +49,6 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Client do
     @base_url <> "?" <> params
   end
 
-
   @doc """
   - `response` (term) - The response returned by `Req.get!`.
 
@@ -69,8 +68,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Client do
   @spec params(WeatherRequest.t()) :: %{}
   defp params(%WeatherRequest{} = struct) do
     # remove keys with nil value from params
-    Map.from_struct(struct) |>
-    Enum.reduce(%{}, fn {key, value}, acc ->
+    Map.from_struct(struct)
+    |> Enum.reduce(%{}, fn {key, value}, acc ->
       if value != nil, do: Map.put(acc, key, value), else: acc
     end)
   end

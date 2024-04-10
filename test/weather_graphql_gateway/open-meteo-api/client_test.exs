@@ -14,6 +14,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.ClientTest do
         hourly: ["precipitation_probability"],
         forecast_days: 1
       }
+
       response = Client.get_weather(request)
 
       assert response["latitude"] == 35.823345
@@ -28,10 +29,13 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.ClientTest do
     test "handles error exception" do
       request = %WeatherRequest{
         latitude: 35.8317,
-        longitude: "asdf",
+        longitude: "asdf"
       }
+
       response = Client.get_weather(request)
-      assert response["reason"] == "Data corrupted at path ''. Cannot initialize Float from invalid String value asdf."
+
+      assert response["reason"] ==
+               "Data corrupted at path ''. Cannot initialize Float from invalid String value asdf."
     end
   end
 
@@ -41,7 +45,14 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.ClientTest do
         latitude: 35.7326,
         longitude: 78.8503,
         current: ["temperature_2m"],
-        daily: ["weather_code", "temperature_2m_max", "temperature_2m_min", "sunrise", "sunset", "precipitation_probability_max"],
+        daily: [
+          "weather_code",
+          "temperature_2m_max",
+          "temperature_2m_min",
+          "sunrise",
+          "sunset",
+          "precipitation_probability_max"
+        ],
         hourly: ["temperature_2m", "precipitation_probability", "weather_code", "is_day"],
         precipitation_unit: "inch",
         temperature_unit: "fahrenheit",
@@ -76,7 +87,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.ClientTest do
       uri = Client.build_url(request) |> URI.parse()
       query = URI.decode_query(uri.query)
 
-      assert Enum.count(query) == 5 #includes timezone by default
+      # includes timezone by default
+      assert Enum.count(query) == 5
       assert query["current[]"] == "temperature_2m"
       assert query["latitude"] == "35.7326"
       assert query["longitude"] == "-78.8503"

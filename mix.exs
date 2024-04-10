@@ -15,7 +15,8 @@ defmodule WeatherGraphqlGateway.MixProject do
       name: "MyApp",
       source_url: "https://github.com/annalo/weather-graphql-gateway",
       docs: [
-        main: "readme", # The main page in the docs
+        # The main page in the docs
+        main: "readme",
         extras: extras(),
         groups_for_extras: groups_for_extras(),
         groups_for_modules: groups_for_modules()
@@ -31,8 +32,7 @@ defmodule WeatherGraphqlGateway.MixProject do
   end
 
   defp groups_for_extras() do
-    [
-    ]
+    []
   end
 
   defp groups_for_modules do

@@ -22,33 +22,34 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.CurrentWeather do
           any()
         ) :: nil
   def get_data(
-    %{
-      latitude: latitude,
-      longitude: longitude,
-      temperature_unit: temperature_unit,
-      precipitation_unit: precipitation_unit,
-      wind_speed_unit: wind_speed_unit,
-    },
-    _args,
-    _resolution
-  ) do
-    response = GraphqlAdapter.request_current_weather(%{
-      latitude: latitude,
-      longitude: longitude,
-      temperature_unit: temperature_unit,
-      precipitation_unit: precipitation_unit,
-      wind_speed_unit: wind_speed_unit,
-      fields: [
-        "apparent_temperature",
-        "cloud_cover",
-        "is_day",
-        "precipitation",
-        "relative_humidity_2m",
-        "temperature_2m",
-        "weather_code",
-        "wind_speed_10m"
-      ]
-    })
+        %{
+          latitude: latitude,
+          longitude: longitude,
+          temperature_unit: temperature_unit,
+          precipitation_unit: precipitation_unit,
+          wind_speed_unit: wind_speed_unit
+        },
+        _args,
+        _resolution
+      ) do
+    response =
+      GraphqlAdapter.request_current_weather(%{
+        latitude: latitude,
+        longitude: longitude,
+        temperature_unit: temperature_unit,
+        precipitation_unit: precipitation_unit,
+        wind_speed_unit: wind_speed_unit,
+        fields: [
+          "apparent_temperature",
+          "cloud_cover",
+          "is_day",
+          "precipitation",
+          "relative_humidity_2m",
+          "temperature_2m",
+          "weather_code",
+          "wind_speed_10m"
+        ]
+      })
 
     {:ok, response}
   end

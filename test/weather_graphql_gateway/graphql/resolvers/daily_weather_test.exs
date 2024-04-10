@@ -13,11 +13,13 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.DailyWeatherTest do
         wind_speed_unit: "mph",
         fields: ["temperature_2m_max", "temperature_2m_min"]
       }
+
       args = %{forecast_days: 2}
 
       {:ok, resolution} = DailyWeather.get_data(parent, args, nil)
 
-      assert length(resolution) == 2 # 2 days
+      # 2 days
+      assert length(resolution) == 2
     end
   end
 end

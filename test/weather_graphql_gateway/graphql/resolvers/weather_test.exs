@@ -10,7 +10,7 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.WeatherTest do
         longitude: -78.85654,
         temperature_unit: "fahrenheit",
         precipitation_unit: "inch",
-        wind_speed_unit: "mph",
+        wind_speed_unit: "mph"
       }
 
       {:ok, resolution} = Weather.get_data(nil, args, nil)

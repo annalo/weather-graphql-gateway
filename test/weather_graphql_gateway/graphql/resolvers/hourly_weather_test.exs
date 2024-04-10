@@ -13,11 +13,13 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.HourlyWeatherTest do
         wind_speed_unit: "mph",
         fields: ["apparent_temperature", "precipitation"]
       }
+
       args = %{forecast_days: 1}
 
       {:ok, resolution} = HourlyWeather.get_data(parent, args, nil)
 
-      assert length(resolution) == 24 # 24 hours in 1 day
+      # 24 hours in 1 day
+      assert length(resolution) == 24
     end
   end
 end

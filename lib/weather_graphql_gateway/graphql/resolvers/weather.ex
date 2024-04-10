@@ -24,25 +24,25 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.Weather do
           wind_speed_unit: String.t()
         }
   def get_data(
-    _parent,
-    %{
-      latitude: latitude,
-      longitude: longitude,
-      precipitation_unit: precipitation_unit,
-      temperature_unit: temperature_unit,
-      wind_speed_unit: wind_speed_unit
-    },
-    _resolution
-  ) do
-      {
-        :ok,
+        _parent,
         %{
           latitude: latitude,
           longitude: longitude,
           precipitation_unit: precipitation_unit,
           temperature_unit: temperature_unit,
           wind_speed_unit: wind_speed_unit
-        }
+        },
+        _resolution
+      ) do
+    {
+      :ok,
+      %{
+        latitude: latitude,
+        longitude: longitude,
+        precipitation_unit: precipitation_unit,
+        temperature_unit: temperature_unit,
+        wind_speed_unit: wind_speed_unit
       }
+    }
   end
 end

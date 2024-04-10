@@ -5,14 +5,14 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlSerializer do
   end
 
   def serialize_daily_weather(%{
-    precipitation_probability_max: precipitation_probability_max,
-    sunrise: sunrise,
-    sunset: sunset,
-    temperature_2m_max: temperature_2m_max,
-    temperature_2m_min: temperature_2m_min,
-    time: time,
-    weather_code: weather_code
-  }) do
+        precipitation_probability_max: precipitation_probability_max,
+        sunrise: sunrise,
+        sunset: sunset,
+        temperature_2m_max: temperature_2m_max,
+        temperature_2m_min: temperature_2m_min,
+        time: time,
+        weather_code: weather_code
+      }) do
     for index <- 0..(length(time) - 1) do
       %{
         precipitation_probability_max: Enum.at(precipitation_probability_max, index),
@@ -27,12 +27,12 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlSerializer do
   end
 
   def serialize_hourly_weather(%{
-    is_day: is_day,
-    precipitation_probability: precipitation_probability,
-    temperature_2m: temperature_2m,
-    time: time,
-    weather_code: weather_code
-  }) do
+        is_day: is_day,
+        precipitation_probability: precipitation_probability,
+        temperature_2m: temperature_2m,
+        time: time,
+        weather_code: weather_code
+      }) do
     for index <- 0..(length(is_day) - 1) do
       %{
         is_day: Enum.at(is_day, index),
