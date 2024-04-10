@@ -20,7 +20,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlSerializer do
         sunset: Enum.at(sunset, index),
         temperature_2m_max: Enum.at(temperature_2m_max, index),
         temperature_2m_min: Enum.at(temperature_2m_min, index),
-        time: Enum.at(time, index),
+        date: Enum.at(time, index),
         weather_code: Enum.at(weather_code, index)
       }
     end

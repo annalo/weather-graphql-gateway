@@ -37,7 +37,7 @@ defmodule WeatherGraphqlGateway.Graphql.Schema.WeatherTypes do
     @desc "The minimum air temperature. (C/F)"
     field :temperature_2m_min, :float, name: "temperature_min"
     @desc "The date of the weather"
-    field :time, :string
+    field :date, :string
     @desc "Weather condition as a numeric code. Follow WMO weather interpretation codes."
     field :weather_code, :integer
   end
