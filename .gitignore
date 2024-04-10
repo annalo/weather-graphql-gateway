@@ -28,3 +28,9 @@ weather_graphql_gateway-*.tar
 
 /config/*.secret.exs
 .elixir_ls/
+
+# Fly.io deployment files
+.dockerignore
+Dockerfile
+fly.toml
+rel/

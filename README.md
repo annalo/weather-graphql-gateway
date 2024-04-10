@@ -1,18 +1,41 @@
-# WeatherGraphqlGateway
+# Weather GraphQL Gateway for Open-Meteo API
 
-To start your Phoenix server:
+## Credit
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+This project utilizes the fantastic [Open-Meteo](https://open-meteo.com/) weather forecast API. A big thanks to their team for providing this valuable open-source resource!
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## Description
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+This project implements a GraphQL gateway in Elixir using Phoenix and Absinthe. It seamlessly integrates the Open-Meteo weather API as a data source, providing a structured GraphQL interface.
 
-## Learn more
+### Features
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+- Leverages Elixir's concurrency and fault tolerance for a robust and scalable solution.
+- Employs Phoenix for efficient web server handling and interaction.
+- Utilizes Absinthe for defining and managing the GraphQL schema and resolvers.
+- Offers a dedicated `OpenMeteoAPI` context for interacting with the weather API via an HTTP client.
+- Includes a `GraphqlAdapter` and `GraphqlSerializer` within the OpenMeteoAPI context, bridging the gap between GraphQL and the HTTP API.
+Usage:
+
+### GraphQL Playground
+
+Access the GraphQL playground directly at https://weather-graphql-gateway.fly.dev/ to test your GraphQL queries visually.
+
+### GraphQL Endpoint
+
+You can query the GraphQL endpoint at https://weather-graphql-gateway.fly.dev/graphql. 
+
+Example:
+
+```graphql
+query {
+  weather(latitude: 52.52, longitude: 13.41) {
+    latitude
+    longitude
+    temperatureUnit
+    current {
+      temperature
+    }
+  }
+}
+```
