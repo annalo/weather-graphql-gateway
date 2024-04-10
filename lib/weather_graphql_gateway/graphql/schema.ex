@@ -32,7 +32,6 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
   import_types WeatherGraphqlGateway.Graphql.Schema.WeatherTypes
   import_types WeatherGraphqlGateway.Graphql.Schema.EnumTypes
 
-
   object :weather do
     field :latitude, :float
     field :longitude, :float
@@ -62,12 +61,12 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
     field :weather, :weather do
       arg :latitude, non_null(:float)
       arg :longitude, non_null(:float)
-      @desc "The unit of measurement for precipitation. Defaults to mm. (mm/inch)"
-      arg :precipitation_unit, non_null(:precipitation_unit)
-      @desc "The unit of measurement for temperature. Defaults to Celsius. (celsius/fahrenheit)"
-      arg :temperature_unit, non_null(:temperature_unit)
-      @desc "The unit of measurement for wind speed. Defaults to kmh. (kmh, ms, mph, kn)"
-      arg :wind_speed_unit, non_null(:wind_speed_unit)
+      @desc "The unit of measurement for precipitation. Defaults to inch. (mm/inch)"
+      arg :precipitation_unit, :precipitation_unit, default_value: :inch
+      @desc "The unit of measurement for temperature. Defaults to Fahrenheit. (celsius/fahrenheit)"
+      arg :temperature_unit, :temperature_unit, default_value: :fahrenheit
+      @desc "The unit of measurement for wind speed. Defaults to mph. (kmh, ms, mph, kn)"
+      arg :wind_speed_unit, :wind_speed_unit, default_value: :mph
 
       resolve &Resolvers.Weather.get_data/3
     end

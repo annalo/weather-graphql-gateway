@@ -23,7 +23,8 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.Weather do
           temperature_unit: String.t(),
           wind_speed_unit: String.t()
         }
-  def get_data(_parent,
+  def get_data(
+    _parent,
     %{
       latitude: latitude,
       longitude: longitude,
@@ -31,7 +32,8 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.Weather do
       temperature_unit: temperature_unit,
       wind_speed_unit: wind_speed_unit
     },
-    _resolution) do
+    _resolution
+  ) do
       {
         :ok,
         %{
