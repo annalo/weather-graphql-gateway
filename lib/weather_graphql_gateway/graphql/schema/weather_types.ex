@@ -4,32 +4,6 @@ defmodule WeatherGraphqlGateway.Graphql.Schema.WeatherTypes do
   """
   use Absinthe.Schema.Notation
 
-  object :weather do
-    field(:latitude, :float)
-    field(:longitude, :float)
-    field(:precipitation_unit, :string)
-    field(:temperature_unit, :string)
-    field(:wind_speed_unit, :string)
-    @desc "Current weather data."
-    field :current, :current do
-      resolve(&Resolvers.CurrentWeather.get_data/3)
-    end
-
-    @desc "Daily weather data. Defaults to 7 days."
-    field :daily, list_of(:daily) do
-      @desc "Per default, only 7 days are returned. Up to 16 days of forecast are possible."
-      arg(:forecast_days, :integer, default_value: 7)
-      resolve(&Resolvers.DailyWeather.get_data/3)
-    end
-
-    @desc "Hourly data. Defaults to today's 24h."
-    field :hourly, list_of(:hourly) do
-      @desc "Per default, today's 24h is returned. Up to 16 days of forecast are possible."
-      arg(:forecast_days, :integer, default_value: 1)
-      resolve(&Resolvers.HourlyWeather.get_data/3)
-    end
-  end
-
   object :current do
     @desc "Perceived feels-like temperature combining wind chill factor, relative humidity and solar radiation. (C/F)"
     field(:apparent_temperature, :float)
