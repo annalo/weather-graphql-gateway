@@ -3,9 +3,9 @@ defmodule WeatherGraphqlGateway.NominatimAPI.ClientTest do
 
   alias WeatherGraphqlGateway.NominatimAPI.Client
 
-  describe "Client.search/1" do
+  describe "Client.geocode/1" do
     test "provide coordinates corresponding to a location" do
-      response = Client.search("Copenhagen")
+      response = Client.geocode("Copenhagen")
       first = Enum.at(response, 0)
 
       assert first["name"] == "København"
@@ -14,9 +14,9 @@ defmodule WeatherGraphqlGateway.NominatimAPI.ClientTest do
     end
   end
 
-  describe "Client.reverse/1" do
+  describe "Client.reverse_geocode/1" do
     test "reverse geocoding" do
-      response = Client.reverse(%{lat: 35.8317, lon: -78.9286})
+      response = Client.reverse_geocode(%{lat: 35.8317, lon: -78.9286})
       address = response["address"]
 
       assert address["city"] == "Cary"

@@ -8,26 +8,26 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
   """
 
   # https://nominatim.openstreetmap.org/search?<params>
-  @search_url "https://nominatim.openstreetmap.org/search?format=jsonv2"
+  @geocode_url "https://nominatim.openstreetmap.org/search?format=jsonv2"
   @reverse_url "https://nominatim.openstreetmap.org/reverse?format=jsonv2"
 
   import Plug.Conn.Query
 
-  def search(query) do
-    query
-    |> build_search_url()
+  def geocode(search) do
+    search
+    |> build_geocode_url()
     |> Req.get()
     |> handle_response()
   end
 
-  def reverse(%{lat: lat, lon: lon}) do
+  def reverse_geocode(%{lat: lat, lon: lon}) do
     build_reverse_url(lat, lon)
     |> Req.get()
     |> handle_response()
   end
 
-  defp build_search_url(query) do
-    @search_url <> "&" <> encode(q: query)
+  defp build_geocode_url(query) do
+    @geocode_url <> "&" <> encode(q: query)
   end
 
   defp build_reverse_url(lat, lon) do

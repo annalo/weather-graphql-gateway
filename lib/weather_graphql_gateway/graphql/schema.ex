@@ -62,11 +62,11 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
 
   query do
     @desc "Geocode data"
-    field :geocode_search, list_of(:location) do
+    field :geocode, list_of(:location) do
       arg(:query, non_null(:string))
     end
 
-    field :geocode_reverse, :reverse do
+    field :reverse_geocode, :reverse do
       arg(:latitude, non_null(:float))
       arg(:longitude, non_null(:float))
     end
