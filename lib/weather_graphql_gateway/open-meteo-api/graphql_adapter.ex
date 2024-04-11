@@ -1,4 +1,4 @@
-defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
+defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter do
   @moduledoc """
   This module serves as an adapter for interfacing with the OpenMeteoAPI to fulfill GraphQL requests.
 
@@ -6,7 +6,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter do
   """
   alias WeatherGraphqlGateway.OpenMeteoAPI.Client
   alias WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest
-  import WeatherGraphqlGateway.OpenMeteoApi.GraphqlSerializer
+  import WeatherGraphqlGateway.OpenMeteoAPI.GraphqlSerializer
 
   @doc """
   Fetches current weather data for a specific location from the OpenMeteoAPI.

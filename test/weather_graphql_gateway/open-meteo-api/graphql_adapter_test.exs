@@ -1,7 +1,7 @@
 defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapterTest do
   use ExUnit.Case
 
-  alias WeatherGraphqlGateway.OpenMeteoApi.GraphqlAdapter
+  alias WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter
 
   describe "request_current_weather" do
     test "fetches and returns current weather" do

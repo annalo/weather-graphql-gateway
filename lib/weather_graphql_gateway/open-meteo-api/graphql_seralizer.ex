@@ -1,4 +1,4 @@
-defmodule WeatherGraphqlGateway.OpenMeteoApi.GraphqlSerializer do
+defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlSerializer do
   @moduledoc """
   Provides functions to serialize weather data received from OpenMeteoAPI responses.
 

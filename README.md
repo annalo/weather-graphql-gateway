@@ -15,7 +15,7 @@ This project implements a GraphQL gateway in Elixir using Phoenix and Absinthe. 
 - Utilizes Absinthe for defining and managing the GraphQL schema and resolvers.
 - Offers a dedicated `OpenMeteoAPI` context for interacting with the weather API via an HTTP client.
 - Includes a `GraphqlAdapter` and `GraphqlSerializer` within the `OpenMeteoAPI` context, bridging the gap between GraphQL and the HTTP API.
-Usage:
+  Usage:
 
 ### GraphQL Playground
 

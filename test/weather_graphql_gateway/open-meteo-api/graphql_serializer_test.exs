@@ -1,7 +1,7 @@
 defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlSerializerTest do
   use ExUnit.Case
 
-  alias WeatherGraphqlGateway.OpenMeteoApi.GraphqlSerializer
+  alias WeatherGraphqlGateway.OpenMeteoAPI.GraphqlSerializer
 
   describe "serialize_daily_weather/1" do
     test "serializes daily weather data" do
