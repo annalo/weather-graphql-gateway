@@ -9,7 +9,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Client do
 
   @base_url "https://api.open-meteo.com/v1/forecast"
 
-  alias Plug.Conn.Query
+  import Plug.Conn.Query
   alias WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest
 
   @doc """
@@ -31,39 +31,16 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Client do
     |> handle_response()
   end
 
-  @doc """
-  Constructs the URL for the Open Meteo API request based on the provided `WeatherRequest` struct.
-
-  - `request` - A WeatherRequest struct containing the query parameters for the API request.
-
-  Returns:
-
-  - A `String.t()` containing the complete URL for the API request.
-
-  This function extracts relevant query parameters from the request struct and builds the URL
-  incorporating the base URL and encoded query parameters.
-  """
   @spec build_url(WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest.t()) :: String.t()
-  def build_url(%WeatherRequest{} = request) do
-    params = request |> params() |> Query.encode()
+  defp build_url(%WeatherRequest{} = request) do
+    params = request |> params() |> encode()
     @base_url <> "?" <> params
   end
 
-  @doc """
-  - `response` (term) - The response returned by `Req.get!`.
-
-  Returns:
-
-  - The response body (`%{}`) on successful request.
-  - The raised `Exception.t()` on error.
-
-  This function extracts the response body from a successful response or re-raises
-  any encountered error. You might want to implement more robust error handling here.
-  """
   @spec handle_response({:ok, Req.Response.t()}) :: %{}
   @spec handle_response({:error, Exception.t()}) :: Exception.t()
-  def handle_response({:ok, response}), do: response.body
-  def handle_response({:error, exception}), do: exception
+  defp handle_response({:ok, response}), do: response.body
+  defp handle_response({:error, exception}), do: exception
 
   @spec params(WeatherRequest.t()) :: %{}
   defp params(%WeatherRequest{} = struct) do
