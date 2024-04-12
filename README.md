@@ -26,7 +26,7 @@ This project implements a GraphQL gateway in Elixir using Phoenix and Absinthe. 
 
 ### GraphQL Playground
 
-Access the GraphQL playground at https://open-meteo-graphql.fly.dev to test your GraphQL queries visually.
+Access the GraphQL playground at https://geocode-weather-graphql.fly.dev to test your GraphQL queries visually.
 
 ### Example
 
@@ -57,4 +57,4 @@ query {
 
 ### GraphQL Endpoint
 
-You can query the GraphQL endpoint at https://open-meteo-graphql.fly.dev.
+You can query the GraphQL endpoint at https://geocode-weather-graphql.fly.dev.
