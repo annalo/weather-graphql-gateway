@@ -7,8 +7,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.ClientTest do
   describe "Client.get_weather/1" do
     test "gets weather data with a valid request" do
       request = %WeatherRequest{
-        latitude: 35.8317,
-        longitude: -78.9286,
+        latitude: 25.03751988317,
+        longitude: 121.56367969286,
         current: ["temperature_2m"],
         daily: ["weather_code"],
         hourly: ["precipitation_probability"],
@@ -17,10 +17,10 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.ClientTest do
 
       response = Client.get_weather(request)
 
-      assert response["latitude"] == 35.823345
-      assert response["longitude"] == -78.93414
-      assert response["timezone"] == "America/New_York"
-      assert response["timezone_abbreviation"] == "EDT"
+      assert response["latitude"] == 25.05
+      assert response["longitude"] == 121.5625
+      assert response["timezone"] == "Asia/Taipei"
+      assert response["timezone_abbreviation"] == "CST"
       assert response["current"]["temperature_2m"] |> is_number() == true
       assert response["hourly"]["precipitation_probability"] |> length() == 24
       assert response["daily"]["weather_code"] |> length() == 1

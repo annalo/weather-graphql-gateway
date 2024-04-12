@@ -8,7 +8,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapterTest do
       locations = GraphqlAdapter.geocode("Copenhagen")
       first = Enum.at(locations, 0)
 
-      assert first.name == "København"
+      assert first.name == "Copenhagen"
       assert first.latitude == 55.6867243
       assert first.longitude == 12.5700724
     end
@@ -22,9 +22,9 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapterTest do
           lon: 4.8924534
         })
 
-      assert location.name == "Amsterdam"
-      assert location.address.country == "Nederland"
-      assert location.address.state == "Noord-Holland"
+      assert location.name == "Centrum"
+      assert location.address.country == "Netherlands"
+      assert location.address.state == "North Holland"
     end
   end
 end

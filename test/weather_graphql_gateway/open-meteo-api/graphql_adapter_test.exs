@@ -7,8 +7,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapterTest do
     test "fetches and returns current weather" do
       request =
         GraphqlAdapter.request_current_weather(%{
-          latitude: 35.7279,
-          longitude: -78.85654,
+          latitude: 25.0340,
+          longitude: 121.5645,
           temperature_unit: "fahrenheit",
           precipitation_unit: "inch",
           wind_speed_unit: "mph",
@@ -41,8 +41,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapterTest do
     test "fetches and returns daily weather" do
       request =
         GraphqlAdapter.request_daily_weather(%{
-          latitude: 35.7279,
-          longitude: -78.85654,
+          latitude: 25.0340,
+          longitude: 121.5645,
           temperature_unit: "celsius",
           precipitation_unit: "mm",
           wind_speed_unit: "kmh",
@@ -74,8 +74,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapterTest do
     test "fetches and returns hourly weather" do
       request =
         GraphqlAdapter.request_hourly_weather(%{
-          latitude: 35.7279,
-          longitude: -78.85654,
+          latitude: 25.0340,
+          longitude: 121.5645,
           temperature_unit: "fahrenheit",
           precipitation_unit: "inch",
           wind_speed_unit: "mph",

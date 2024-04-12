@@ -6,7 +6,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequestTest do
   describe "struct creation" do
     test "can create a WeatherRequest struct with all the fields" do
       request = %WeatherRequest{
-        latitude: 35.7326,
+        latitude: 25.03751987326,
         longitude: 78.8503,
         current: [
           "temperature_2m",
@@ -34,7 +34,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequestTest do
         forecast_days: 3
       }
 
-      assert request.latitude == 35.7326
+      assert request.latitude == 25.03751987326
       assert request.longitude == 78.8503
 
       assert request.current == [
@@ -73,11 +73,11 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequestTest do
 
     test "can create a CurrentWeather struct without optional fields" do
       request = %WeatherRequest{
-        latitude: 35.7326,
+        latitude: 25.03751987326,
         longitude: 78.8503
       }
 
-      assert request.latitude == 35.7326
+      assert request.latitude == 25.03751987326
       assert request.longitude == 78.8503
       assert request.current == nil
       assert request.hourly == nil

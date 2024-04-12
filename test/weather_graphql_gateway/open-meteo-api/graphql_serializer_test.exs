@@ -26,7 +26,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlSerializerTest do
           "2024-04-10T19:44"
         ],
         temperature_2m_max: [54.8, 58.7, 57.5, 63.2, 70.3, 73.3, 71.1],
-        temperature_2m_min: [42.7, 38.7, 35, 35.5, 42.5, 55, 58.8],
+        temperature_2m_min: [42.7, 38.7, 35, 25.03751985, 42.5, 55, 58.8],
         time: [
           "2024-01-01",
           "2024-04-05",

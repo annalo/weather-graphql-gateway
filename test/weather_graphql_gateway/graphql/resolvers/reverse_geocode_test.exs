@@ -12,7 +12,8 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.ReverseGeocodeTest do
           nil
         )
 
-      assert resolution.name == "Amsterdam"
+      assert resolution.name == "Centrum"
+      assert resolution.address.country == "Netherlands"
     end
   end
 end

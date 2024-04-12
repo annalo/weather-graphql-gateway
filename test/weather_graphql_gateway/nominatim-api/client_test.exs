@@ -8,7 +8,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.ClientTest do
       response = Client.geocode("Copenhagen")
       first = Enum.at(response, 0)
 
-      assert first["name"] == "København"
+      assert first["name"] == "Copenhagen"
       assert first["lat"] == "55.6867243"
       assert first["lon"] == "12.5700724"
     end
@@ -16,11 +16,11 @@ defmodule WeatherGraphqlGateway.NominatimAPI.ClientTest do
 
   describe "Client.reverse_geocode/1" do
     test "reverse geocoding" do
-      response = Client.reverse_geocode(%{lat: 35.8317, lon: -78.9286})
+      response = Client.reverse_geocode(%{lat: 25.03751988317, lon: 121.56367969286})
       address = response["address"]
 
-      assert address["city"] == "Cary"
-      assert address["state"] == "North Carolina"
+      assert address["city"] == "Taipei"
+      assert address["country"] == "Taiwan"
     end
   end
 end

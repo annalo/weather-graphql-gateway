@@ -8,8 +8,8 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
   """
 
   # https://nominatim.openstreetmap.org/search?<params>
-  @geocode_url "https://nominatim.openstreetmap.org/search?format=jsonv2"
-  @reverse_url "https://nominatim.openstreetmap.org/reverse?format=jsonv2"
+  @geocode_url "https://nominatim.openstreetmap.org/search?format=jsonv2&accept-language=en"
+  @reverse_url "https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en"
 
   import Plug.Conn.Query
 

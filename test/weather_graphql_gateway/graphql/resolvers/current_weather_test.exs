@@ -6,8 +6,8 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.CurrentWeatherTest do
   describe "get_data" do
     test "returns current weather parameters" do
       parent = %{
-        latitude: 35.7279,
-        longitude: -78.85654,
+        latitude: 25.0340,
+        longitude: 121.5645,
         temperature_unit: "fahrenheit",
         precipitation_unit: "inch",
         wind_speed_unit: "mph",

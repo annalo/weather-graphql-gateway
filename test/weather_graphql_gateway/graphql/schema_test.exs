@@ -46,8 +46,8 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
       post(conn, "/", %{
         "query" => @weather_query,
         "variables" => %{
-          latitude: 35.7279,
-          longitude: -78.85654,
+          latitude: 25.0340,
+          longitude: 121.5645,
           daily_forecast_days: 5,
           hourly_forecast_days: 2
         }
@@ -56,8 +56,8 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
     response = json_response(conn, 200)
     weather_data = response["data"]["weather"]
 
-    assert weather_data["latitude"] == 35.7279
-    assert weather_data["longitude"] == -78.85654
+    assert weather_data["latitude"] == 25.0340
+    assert weather_data["longitude"] == 121.5645
     assert weather_data["precipitationUnit"] == "inch"
     assert weather_data["temperatureUnit"] == "fahrenheit"
     assert weather_data["windSpeedUnit"] == "mph"
@@ -72,7 +72,7 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
       post(conn, "/", %{
         "query" => @geocode_query,
         "variables" => %{
-          query: "Amsterdam"
+          query: "Taipei"
         }
       })
 
@@ -80,6 +80,6 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
     geocode_data = response["data"]["geocode"]
     first = Enum.at(geocode_data, 0)
 
-    assert first["name"] == "Amsterdam"
+    assert first["name"] == "Taipei"
   end
 end
