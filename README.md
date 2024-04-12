@@ -43,7 +43,7 @@ query {
   }
 
   # Geocoding - query search to coordinates
-  geocode(address: "1600 Pennsylvania Ave NW, Washington, DC, USA") {
+  geocode(address: "Taipei") {
     latitude
     longitude
   }
