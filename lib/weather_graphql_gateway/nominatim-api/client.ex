@@ -20,7 +20,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
     |> handle_response()
   end
 
-  def reverse_geocode(%{lat: lat, lon: lon}) do
+  def reverse_geocode(%{latitude: lat, longitude: lon}) do
     build_reverse_url(lat, lon)
     |> Req.get()
     |> handle_response()

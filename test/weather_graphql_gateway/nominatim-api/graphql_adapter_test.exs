@@ -18,8 +18,8 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapterTest do
     test "queries and returns reverse geocode location" do
       location =
         GraphqlAdapter.reverse_geocode(%{
-          lat: 52.3730796,
-          lon: 4.8924534
+          latitude: 52.3730796,
+          longitude: 4.8924534
         })
 
       assert location.name == "Centrum"

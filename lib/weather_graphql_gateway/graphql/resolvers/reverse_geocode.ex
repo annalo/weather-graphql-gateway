@@ -13,7 +13,7 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.ReverseGeocode do
           any()
         ) :: {:ok, any()}
   def query(_parent, %{latitude: lat, longitude: lon}, _resolution) do
-    response = GraphqlAdapter.reverse_geocode(%{lat: lat, lon: lon})
+    response = GraphqlAdapter.reverse_geocode(%{latitude: lat, longitude: lon})
     {:ok, response}
   end
 end

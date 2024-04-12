@@ -16,7 +16,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.ClientTest do
 
   describe "Client.reverse_geocode/1" do
     test "reverse geocoding" do
-      response = Client.reverse_geocode(%{lat: 25.03751988317, lon: 121.56367969286})
+      response = Client.reverse_geocode(%{latitude: 25.03751988317, longitude: 121.56367969286})
       address = response["address"]
 
       assert address["city"] == "Taipei"
