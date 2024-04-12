@@ -64,6 +64,7 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
     @desc "Geocode data"
     field :geocode, list_of(:location) do
       arg(:query, non_null(:string))
+      resolve(&Resolvers.Geocode.query/3)
     end
 
     field :reverse_geocode, :reverse do

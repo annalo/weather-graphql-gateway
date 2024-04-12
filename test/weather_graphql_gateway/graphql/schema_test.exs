@@ -31,9 +31,19 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
   }
   """
 
-  test "query: weather", %{conn: conn} do
+  @geocode_query """
+  query geocode($query: String!) {
+    geocode(query: $query) {
+      name
+      latitude
+      longitude
+    }
+  }
+  """
+
+  test "query weather", %{conn: conn} do
     conn =
-      post(conn, "/api", %{
+      post(conn, "/", %{
         "query" => @weather_query,
         "variables" => %{
           latitude: 35.7279,
@@ -55,5 +65,21 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
     assert weather_data["current"]["apparentTemperature"] |> is_number == true
     assert weather_data["daily"] |> length() == 5
     assert weather_data["hourly"] |> length() == 48
+  end
+
+  test "query geocode", %{conn: conn} do
+    conn =
+      post(conn, "/", %{
+        "query" => @geocode_query,
+        "variables" => %{
+          query: "Amsterdam"
+        }
+      })
+
+    response = json_response(conn, 200)
+    geocode_data = response["data"]["geocode"]
+    first = Enum.at(geocode_data, 0)
+
+    assert first["name"] == "Amsterdam"
   end
 end

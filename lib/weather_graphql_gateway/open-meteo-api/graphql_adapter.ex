@@ -48,7 +48,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter do
       current: fields
     }
 
-    Client.get_weather(struct)["current"] |> atomize()
+    Client.get_weather(struct)["current"] |> atomize_keys()
   end
 
   @doc """
@@ -101,7 +101,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter do
     }
 
     Client.get_weather(struct)["daily"]
-    |> atomize()
+    |> atomize_keys()
     |> serialize_daily_weather()
   end
 
@@ -150,7 +150,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter do
     }
 
     Client.get_weather(struct)["hourly"]
-    |> atomize()
+    |> atomize_keys()
     |> serialize_hourly_weather()
   end
 end

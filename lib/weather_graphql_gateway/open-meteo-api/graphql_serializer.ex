@@ -12,8 +12,8 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlSerializer do
   @doc """
   Converts map keys to atoms.
   """
-  @spec atomize(map()) :: map()
-  def atomize(map) do
+  @spec atomize_keys(map()) :: map()
+  def atomize_keys(map) do
     map
     |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
   end

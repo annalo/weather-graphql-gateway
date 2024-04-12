@@ -13,8 +13,8 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
 
   import Plug.Conn.Query
 
-  def geocode(search) do
-    search
+  def geocode(query) do
+    query
     |> build_geocode_url()
     |> Req.get()
     |> handle_response()
