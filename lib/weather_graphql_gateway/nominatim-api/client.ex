@@ -26,6 +26,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
 
   A map containing the geocoding information retrieved from the Nominatim API, or an exception if the request fails. The returned map may include keys like `latitude`, `longitude`, and other details depending on the API response.
   """
+  @spec geocode(String.t()) :: [map()]
   def geocode(query) do
     query
     |> build_geocode_url()
@@ -46,16 +47,19 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
 
   A map containing the address details retrieved from the Nominatim API based on the provided coordinate.
   """
+  @spec reverse_geocode(%{latitude: number(), longitude: number()}) :: map()
   def reverse_geocode(%{latitude: lat, longitude: lon}) do
     build_reverse_url(lat, lon)
     |> Req.get()
     |> handle_response()
   end
 
+  @spec build_geocode_url(String.t()) :: String.t()
   defp build_geocode_url(query) do
     @geocode_url <> "&" <> encode(q: query)
   end
 
+  @spec build_reverse_url(number(), number()) :: String.t()
   defp build_reverse_url(lat, lon) do
     # zoom: Level of detail required for the address
     # https://nominatim.org/release-docs/develop/api/Reverse/#example-with-formatjsonv2

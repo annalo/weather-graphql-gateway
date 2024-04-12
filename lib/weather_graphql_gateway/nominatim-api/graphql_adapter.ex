@@ -18,6 +18,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter do
 
   A list of location results from the geocode query retrieved from the NominatimAPI.
   """
+  @spec geocode(String.t()) :: [map()]
   def geocode(query) do
     query
     |> Client.geocode()
@@ -35,6 +36,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter do
 
   A map containing the address details retrieved from the Nominatim API based on the provided coordinates.
   """
+  @spec reverse_geocode(%{latitude: number(), longitude: number()}) :: map()
   def reverse_geocode(%{latitude: lat, longitude: lon}) do
     Client.reverse_geocode(%{latitude: lat, longitude: lon})
     |> atomize_keys()
