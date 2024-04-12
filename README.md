@@ -42,13 +42,13 @@ query {
     }
   }
 
-  # Geocoding example - convert address to coordinates (NominatimAPI)
+  # Geocoding - query search to coordinates
   geocode(address: "1600 Pennsylvania Ave NW, Washington, DC, USA") {
     latitude
     longitude
   }
 
-  # Reverse geocoding example - convert coordinates to address (NominatimAPI)
+  # Reverse geocoding - coordinates to location
   reverseGeocode(latitude: 37.7749, longitude: -122.4194) {
     address
   }
