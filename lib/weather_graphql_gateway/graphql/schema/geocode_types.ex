@@ -5,21 +5,24 @@ defmodule WeatherGraphqlGateway.Graphql.Schema.GeocodeTypes do
   use Absinthe.Schema.Notation
 
   object :location do
-    field(:name, :string)
+    field(:category, :string)
     field(:display_name, :string)
     field(:latitude, :float)
     field(:longitude, :float)
-    field(:category, :string)
+    field(:name, :string)
     field(:type, :string)
   end
 
-  object :reverse do
-    field(:name, :string)
+  object :reverse_geocode do
     field(:address, :address)
+    field(:display_name, :string)
+    field(:name, :string)
   end
 
   object :address do
-    field(:state, :string)
+    field(:city, :string)
     field(:country, :string)
+    field(:country_code, :string)
+    field(:state, :string)
   end
 end

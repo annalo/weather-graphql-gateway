@@ -41,6 +41,14 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
   }
   """
 
+  @reverse_geocode_query """
+  query reverse_geocode($lat: Float!, $lon: Float!) {
+    reverse_geocode(latitude: $lat, longitude: $lon) {
+      name
+    }
+  }
+  """
+
   test "query weather", %{conn: conn} do
     conn =
       post(conn, "/", %{
@@ -81,5 +89,19 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
     first = Enum.at(geocode_data, 0)
 
     assert first["name"] == "Taipei"
+    assert first["latitude"] == 25.0375198
+  end
+
+  test "query reverse_geocode", %{conn: conn} do
+    conn =
+      post(conn, "/", %{
+        "query" => @reverse_geocode_query,
+        "variables" => %{lat: 25.0340, lon: 121.5645}
+      })
+
+    response = json_response(conn, 200)
+    geocode = response["data"]["reverse_geocode"]
+
+    assert geocode["name"] == "Taipei 101"
   end
 end
