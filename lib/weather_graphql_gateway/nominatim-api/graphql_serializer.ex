@@ -1,9 +1,8 @@
 defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlSerializer do
-  def serialize_geocode_data(response) do
-    response |> Enum.map(&atomize_geocode_location/1)
-  end
-
-
+  @doc """
+  Converts nested map keys to atoms.
+  """
+  @spec atomize_keys(any()) :: any()
   def atomize_keys(map) when is_map(map) do
     for {key, value} <- map, into: %{} do
       {String.to_atom(key), atomize_keys(value)}
@@ -12,7 +11,26 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlSerializer do
 
   def atomize_keys(value), do: value
 
-  defp atomize_geocode_location(location) do
+  @doc """
+  Serializes geocode data retrieved from the Nominatim API query.
+
+  This function takes a list of geocode data, atomize the keys,
+  and convert latitude and longitude from string to float.
+  """
+  @spec serialize_geocode_data(list(map())) ::
+          list(%{
+            :name => String.t(),
+            :display_name => String.t(),
+            :latitude => number(),
+            :longitude => number(),
+            :category => String.t(),
+            :type => String.t()
+          })
+  def serialize_geocode_data(response) do
+    response |> Enum.map(&serialize_geocode_location/1)
+  end
+
+  defp serialize_geocode_location(location) do
     %{
       name: location["name"],
       display_name: location["display_name"],

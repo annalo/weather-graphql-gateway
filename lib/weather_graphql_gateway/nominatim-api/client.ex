@@ -13,6 +13,19 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
 
   import Plug.Conn.Query
 
+  @doc """
+  Performs forward geocoding using the Nominatim Geocoding API.
+
+  This function takes a textual address as input and attempts to convert it into geographical coordinates (latitude and longitude). It utilizes the Nominatim API to retrieve the corresponding geocoding information.
+
+  ## Arguments:
+
+    - `query` (String) - The textual address to be geocoded.
+
+  ## Returns:
+
+  A map containing the geocoding information retrieved from the Nominatim API, or an exception if the request fails. The returned map may include keys like `latitude`, `longitude`, and other details depending on the API response.
+  """
   def geocode(query) do
     query
     |> build_geocode_url()
@@ -20,6 +33,19 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
     |> handle_response()
   end
 
+  @doc """
+  Performs reverse geocoding using the Nominatim Geocoding API.
+
+  This function takes a map containing latitude and longitude keys as input and attempts to convert those coordinates into a human-readable address. It utilizes the Nominatim API to retrieve the corresponding address details.
+
+  # Arguments
+
+    - `location` - A map with :latitude and :longitude keys representing the geographical coordinates to be reverse geocoded.
+
+  # Returns
+
+  A map containing the address details retrieved from the Nominatim API based on the provided coordinate.
+  """
   def reverse_geocode(%{latitude: lat, longitude: lon}) do
     build_reverse_url(lat, lon)
     |> Req.get()
@@ -38,19 +64,8 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
     @reverse_url <> "&" <> params
   end
 
-  @doc """
-  - `response` (term) - The response returned by `Req.get!`.
-
-  Returns:
-
-  - The response body (`%{}`) on successful request.
-  - The raised `Exception.t()` on error.
-
-  This function extracts the response body from a successful response or re-raises
-  any encountered error. You might want to implement more robust error handling here.
-  """
   @spec handle_response({:ok, Req.Response.t()}) :: %{}
   @spec handle_response({:error, Exception.t()}) :: Exception.t()
-  def handle_response({:ok, response}), do: response.body
-  def handle_response({:error, exception}), do: exception
+  defp handle_response({:ok, response}), do: response.body
+  defp handle_response({:error, exception}), do: exception
 end

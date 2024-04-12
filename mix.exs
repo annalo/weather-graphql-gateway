@@ -37,13 +37,31 @@ defmodule WeatherGraphqlGateway.MixProject do
 
   defp groups_for_modules do
     [
-      GraphQL: [],
+      GraphQL: [
+        WeatherGraphqlGateway.Graphql.Schema,
+        WeatherGraphqlGateway.Graphql.Schema.EnumTypes,
+        WeatherGraphqlGateway.Graphql.Schema.GeocodeTypes,
+        WeatherGraphqlGateway.Graphql.Schema.WeatherTypes,
+        WeatherGraphqlGateway.Graphql.Resolvers.Weather,
+        WeatherGraphqlGateway.Graphql.Resolvers.CurrentWeather,
+        WeatherGraphqlGateway.Graphql.Resolvers.DailyWeather,
+        WeatherGraphqlGateway.Graphql.Resolvers.HourlyWeather,
+        WeatherGraphqlGateway.Graphql.Resolvers.Geocode,
+        WeatherGraphqlGateway.Graphql.Resolvers.ReverseGeocode
+      ],
+      "Nominatim API": [
+        WeatherGraphqlGateway.NominatimAPI.Client,
+        WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter,
+        WeatherGraphqlGateway.NominatimAPI.GraphqlSerializer
+      ],
       "Open Meteo API": [
         WeatherGraphqlGateway.OpenMeteoAPI.Client,
         WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest,
         WeatherGraphqlGateway.OpenMeteoAPI.Models.CurrentWeather,
         WeatherGraphqlGateway.OpenMeteoAPI.Models.HourlyWeather,
-        WeatherGraphqlGateway.OpenMeteoAPI.Models.DailyWeather
+        WeatherGraphqlGateway.OpenMeteoAPI.Models.DailyWeather,
+        WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter,
+        WeatherGraphqlGateway.OpenMeteoAPI.GraphqlSerializer
       ]
     ]
   end

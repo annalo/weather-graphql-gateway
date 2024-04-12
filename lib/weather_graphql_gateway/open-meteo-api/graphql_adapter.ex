@@ -1,15 +1,15 @@
 defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter do
   @moduledoc """
-  This module serves as an adapter for interfacing with the OpenMeteoAPI to fulfill GraphQL requests.
+  This module serves as an adapter for interfacing with OpenMeteoAPI to fulfill GraphQL requests.
 
-  It provides functions to translate GraphQL queries into requests to the OpenMeteoAPI and process the responses accordingly.
+  It provides functions to translate GraphQL queries into requests to OpenMeteoAPI and process the responses accordingly.
   """
   alias WeatherGraphqlGateway.OpenMeteoAPI.Client
   alias WeatherGraphqlGateway.OpenMeteoAPI.Models.WeatherRequest
   import WeatherGraphqlGateway.OpenMeteoAPI.GraphqlSerializer
 
   @doc """
-  Fetches current weather data for a specific location from the OpenMeteoAPI.
+  Fetches current weather data for a specific location from OpenMeteoAPI.
 
   ## Parameters:
 
@@ -21,7 +21,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter do
 
   ## Returns:
 
-  A map containing the current weather data retrieved from the OpenMeteoAPI.
+  A map containing the current weather data retrieved from OpenMeteoAPI.
   """
   @spec request_current_weather(%{
           latitude: number(),
@@ -52,7 +52,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter do
   end
 
   @doc """
-  Fetches daily weather data for a specific location from the OpenMeteoAPI.
+  Fetches daily weather data for a specific location from OpenMeteoAPI.
 
   ## Parameters:
 
@@ -65,7 +65,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter do
 
   ## Returns:
 
-  A map containing the daily weather data retrieved from the OpenMeteoAPI.
+  A map containing the daily weather data retrieved from OpenMeteoAPI.
   """
   @spec request_daily_weather(%{
           forecast_days: integer(),
@@ -106,7 +106,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter do
   end
 
   @doc """
-  Fetches hourly weather data for a specific location from the OpenMeteoAPI.
+  Fetches hourly weather data for a specific location from OpenMeteoAPI.
 
   ## Parameters:
 
@@ -119,7 +119,7 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlAdapter do
 
   ## Returns:
 
-  A map containing the hourly weather data retrieved from the OpenMeteoAPI.
+  A map containing the hourly weather data retrieved from OpenMeteoAPI.
   """
   @spec request_hourly_weather(%{
           forecast_days: integer(),
