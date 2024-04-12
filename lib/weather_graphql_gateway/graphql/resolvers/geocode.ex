@@ -11,7 +11,7 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.Geocode do
           any(),
           %{:query => String.t()},
           any()
-        ) :: %{query: String.t()}
+        ) :: {:ok, any()}
   def query(_parent, %{query: query}, _resolution) do
     response = GraphqlAdapter.geocode(query)
     {:ok, response}

@@ -12,4 +12,9 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter do
     |> Client.geocode()
     |> serialize_geocode_data()
   end
+
+  def reverse_geocode(%{lat: lat, lon: lon}) do
+    Client.reverse_geocode(%{lat: lat, lon: lon})
+    |> atomize_keys()
+  end
 end

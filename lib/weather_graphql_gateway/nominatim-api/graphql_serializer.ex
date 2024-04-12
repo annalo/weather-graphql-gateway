@@ -3,6 +3,15 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlSerializer do
     response |> Enum.map(&atomize_geocode_location/1)
   end
 
+
+  def atomize_keys(map) when is_map(map) do
+    for {key, value} <- map, into: %{} do
+      {String.to_atom(key), atomize_keys(value)}
+    end
+  end
+
+  def atomize_keys(value), do: value
+
   defp atomize_geocode_location(location) do
     %{
       name: location["name"],

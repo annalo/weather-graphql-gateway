@@ -31,7 +31,10 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
   end
 
   defp build_reverse_url(lat, lon) do
-    params = encode(lat: lat, lon: lon, zoom: 18)
+    # zoom: Level of detail required for the address
+    # https://nominatim.org/release-docs/develop/api/Reverse/#example-with-formatjsonv2
+    # set to zoom to neighborhood
+    params = encode(lat: lat, lon: lon, zoom: 14)
     @reverse_url <> "&" <> params
   end
 
