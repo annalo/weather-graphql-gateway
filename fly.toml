@@ -1,16 +1,16 @@
-# fly.toml app configuration file generated for open-meteo-graphql on 2024-04-10T17:43:02-04:00
+# fly.toml app configuration file generated for geocode-weather-graphql on 2024-04-12T16:10:10-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'open-meteo-graphql'
+app = 'geocode-weather-graphql'
 primary_region = 'iad'
 kill_signal = 'SIGTERM'
 
 [build]
 
 [env]
-  PHX_HOST = 'open-meteo-graphql.fly.dev'
+  PHX_HOST = 'geocode-weather-graphql.fly.dev'
   PORT = '8080'
 
 [http_service]
