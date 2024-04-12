@@ -1,30 +1,38 @@
-# Weather GraphQL Gateway for Open-Meteo API
+# Weather and Geocoding GraphQL Gateway
 
 ## Credit
 
-This project utilizes the fantastic [Open-Meteo](https://open-meteo.com/) weather forecast API. A big thanks to their team for providing this valuable open-source resource!
+This project utilizes the fantastic:
+
+- [Open-Meteo](https://open-meteo.com/) weather forecast API
+- [Nominatim](https://nominatim.openstreetmap.org/) open-source geocoding service which uses OpenStreetMap data.
+
+A big thanks to their teams for providing these valuable resources!
 
 ## Description
 
-This project implements a GraphQL gateway in Elixir using Phoenix and Absinthe. It seamlessly integrates the Open-Meteo weather API as a data source, providing a structured GraphQL interface.
+This project implements a GraphQL gateway in Elixir using Phoenix and Absinthe. It seamlessly integrates the Open-Meteo weather API and Nominatim geocoding service as data sources, providing a structured GraphQL interface.
 
 ### Features
 
 - Leverages Elixir's concurrency and fault tolerance for a robust and scalable solution.
 - Employs Phoenix for efficient web server handling and interaction.
 - Utilizes Absinthe for defining and managing the GraphQL schema and resolvers.
-- Offers a dedicated `OpenMeteoAPI` context for interacting with the weather API via an HTTP client.
-- Includes a `GraphqlAdapter` and `GraphqlSerializer` within the `OpenMeteoAPI` context, bridging the gap between GraphQL and the HTTP API.
-  Usage:
+- Offers dedicated contexts for interacting with each API:
+    - `OpenMeteoAPI` context for weather data retrieval.
+    - `NominatimAPI` context for geocoding and reverse geocoding functionalities.
+- Both contexts utilize HTTP clients for communication with their respective APIs.
+- `GraphqlAdapter` and `GraphqlSerializer` components within each context bridge the gap between GraphQL and the APIs (data fetching and serialization).
 
 ### GraphQL Playground
 
-Access the GraphQL playground directly at https://open-meteo-graphql.fly.dev to test your GraphQL queries visually.
+Access the GraphQL playground at https://open-meteo-graphql.fly.dev to test your GraphQL queries visually.
 
 ### Example
 
 ```graphql
 query {
+  # Weather data using latitude and longitude (OpenMeteoAPI)
   weather(latitude: 52.52, longitude: 13.41) {
     latitude
     longitude
@@ -32,6 +40,17 @@ query {
     current {
       temperature
     }
+  }
+
+  # Geocoding example - convert address to coordinates (NominatimAPI)
+  geocode(address: "1600 Pennsylvania Ave NW, Washington, DC, USA") {
+    latitude
+    longitude
+  }
+
+  # Reverse geocoding example - convert coordinates to address (NominatimAPI)
+  reverseGeocode(latitude: 37.7749, longitude: -122.4194) {
+    address
   }
 }
 ```
