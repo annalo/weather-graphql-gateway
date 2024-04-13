@@ -6,6 +6,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
   the Nominatim API (https://nominatim.openstreetmap.org). It defines a client that
   can be used to make requests to the API and retrieve geocoding information.
   """
+  alias WeatherGraphqlGateway.NominatimAPI.Models.Geocode
 
   # https://nominatim.openstreetmap.org/search?<params>
   @geocode_url "https://nominatim.openstreetmap.org/search?format=jsonv2&accept-language=en"
@@ -64,12 +65,29 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
     # zoom: Level of detail required for the address
     # https://nominatim.org/release-docs/develop/api/Reverse/#example-with-formatjsonv2
     # set to zoom to neighborhood
-    params = encode(lat: lat, lon: lon, zoom: 14)
+    params = encode(lat: lat, lon: lon, zoom: 10)
     @reverse_url <> "&" <> params
   end
 
   @spec handle_response({:ok, Req.Response.t()}) :: %{}
   @spec handle_response({:error, Exception.t()}) :: Exception.t()
-  defp handle_response({:ok, response}), do: response.body
+  defp handle_response({:ok, response}), do: response.body |> deserialize_response()
   defp handle_response({:error, exception}), do: exception
+
+  defp deserialize_response(list) when is_list(list) do
+    for object <- list, do: deserialize_response(object)
+  end
+
+  defp deserialize_response(object) do
+    %Geocode{
+      boundingbox: object["boundingbox"] |> deserialize_boundingbox(),
+      display_name: object["display_name"],
+      lat: object["lat"] |> String.to_float(),
+      lon: object["lon"] |> String.to_float(),
+      name: object["name"],
+      place_rank: object["place_rank"]
+    }
+  end
+
+  defp deserialize_boundingbox(list), do: Enum.map(list, &String.to_float/1)
 end
