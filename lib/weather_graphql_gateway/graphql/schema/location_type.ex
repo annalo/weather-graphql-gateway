@@ -1,10 +1,10 @@
-defmodule WeatherGraphqlGateway.Graphql.Schema.GeocodeType do
+defmodule WeatherGraphqlGateway.Graphql.Schema.LocationType do
   @moduledoc """
   This module defines GraphQL object types representing different geocoding types.
   """
   use Absinthe.Schema.Notation
 
-  object :geocode do
+  object :location do
     @desc "Area of corner coordinates."
     field(:boundingbox, list_of(:float))
     @desc "Full comma-separated address."

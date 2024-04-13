@@ -33,18 +33,22 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
 
   @geocode_query """
   query geocode($query: String!) {
-    geocode(query: $query) {
-      name
-      latitude
-      longitude
+    geocode {
+      search(query: $query) {
+        name
+        latitude
+        longitude
+      }
     }
   }
   """
 
   @reverse_geocode_query """
   query reverse_geocode($lat: Float!, $lon: Float!) {
-    reverse_geocode(latitude: $lat, longitude: $lon) {
-      name
+    geocode {
+      reverse(latitude: $lat, longitude: $lon) {
+        name
+      }
     }
   }
   """
@@ -75,7 +79,7 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
     assert weather_data["hourly"] |> length() == 48
   end
 
-  test "query geocode", %{conn: conn} do
+  test "query geocode search", %{conn: conn} do
     conn =
       post(conn, "/", %{
         "query" => @geocode_query,
@@ -85,7 +89,7 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
       })
 
     response = json_response(conn, 200)
-    geocode_data = response["data"]["geocode"]
+    geocode_data = response["data"]["geocode"]["search"]
     first = Enum.at(geocode_data, 0)
 
     assert first["name"] == "Taipei"
@@ -100,7 +104,7 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
       })
 
     response = json_response(conn, 200)
-    geocode = response["data"]["reverse_geocode"]
+    geocode = response["data"]["geocode"]["reverse"]
 
     assert geocode["name"] == "Xinyi District"
   end

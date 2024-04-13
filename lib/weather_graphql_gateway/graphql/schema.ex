@@ -30,12 +30,11 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
 
   import_types(Absinthe.Type.Custom)
   import_types(WeatherGraphqlGateway.Graphql.Schema.EnumTypes)
-  import_types(WeatherGraphqlGateway.Graphql.Schema.GeocodeType)
+  import_types(WeatherGraphqlGateway.Graphql.Schema.LocationType)
   import_types(WeatherGraphqlGateway.Graphql.Schema.WeatherTypes)
 
-  query do
-    @desc "Geocode"
-    field :geocode, list_of(:geocode) do
+  object :geocode do
+    field :search, list_of(:location) do
       @desc "Address query to geocode."
       arg(:query, non_null(:string))
       @desc "Limit the maximum number of returned results. Cannot be more than 40. Defaults to 10"
@@ -43,16 +42,23 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
       @desc "Preferred language order for showing search results. This may either be a simple comma-separated list of language codes. Defaults to 'en'."
       arg(:language, :string, default_value: "en")
 
-      resolve(&Resolvers.Geocode.query/3)
+      resolve(&Resolvers.GeocodeSearch.query/3)
     end
 
-    @desc "Reverse geocode"
-    field :reverse_geocode, :geocode do
+    field :reverse, :location do
       @desc "The latitude of the coordinates to reverse geocode"
       arg(:latitude, non_null(:float))
       @desc "The longitude of the coordinates to reverse geocode"
       arg(:longitude, non_null(:float))
+
       resolve(&Resolvers.ReverseGeocode.query/3)
+    end
+  end
+
+  query do
+    @desc "Geocode"
+    field :geocode, :geocode do
+      resolve(&Resolvers.Geocode.get_data/3)
     end
 
     @desc "Weather data"

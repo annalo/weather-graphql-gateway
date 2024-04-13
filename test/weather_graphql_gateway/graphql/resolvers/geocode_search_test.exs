@@ -1,14 +1,14 @@
-defmodule WeatherGraphqlGateway.Graphql.Resolvers.GeocodeTest do
+defmodule WeatherGraphqlGateway.Graphql.Resolvers.GeocodeSearchTest do
   use ExUnit.Case
 
-  alias WeatherGraphqlGateway.Graphql.Resolvers.Geocode
+  alias WeatherGraphqlGateway.Graphql.Resolvers.GeocodeSearch
 
-  describe "Geocode.query" do
+  describe "GeocodeSearch.query" do
     test "returns list of geocodes" do
       {:ok, resolution} =
-        Geocode.query(
+        GeocodeSearch.query(
           nil,
-          %{query: "Amsterdam", limit: 2},
+          %{query: "Amsterdam", limit: 2, language: "en"},
           nil
         )
 
