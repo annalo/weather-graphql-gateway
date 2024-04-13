@@ -42,4 +42,8 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter do
   def reverse_geocode(%{lat: lat, lon: lon}) do
     Client.reverse_geocode(%{lat: lat, lon: lon})
   end
+
+  def reverse_geocode(%{lat: lat, lon: lon}, language) do
+    Client.reverse_geocode(%{lat: lat, lon: lon}, language)
+  end
 end

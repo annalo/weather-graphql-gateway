@@ -10,7 +10,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
 
   # https://nominatim.openstreetmap.org/search?<params>
   @geocode_url "https://nominatim.openstreetmap.org/search?format=jsonv2"
-  @reverse_url "https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en"
+  @reverse_url "https://nominatim.openstreetmap.org/reverse?format=jsonv2"
 
   import Plug.Conn.Query
 
@@ -54,9 +54,15 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
 
   A map containing the address details retrieved from the Nominatim API based on the provided coordinate.
   """
-  @spec reverse_geocode(%{lat: number(), lon: number()}) :: map()
-  def reverse_geocode(%{lat: lat, lon: lon}) do
-    build_reverse_url(lat, lon)
+  @spec reverse_geocode(
+          %{lat: number(), lon: number()},
+          String.t()
+        ) :: map()
+  def reverse_geocode(
+        %{lat: lat, lon: lon},
+        language \\ "en"
+      ) do
+    build_reverse_url(lat, lon, language)
     |> Req.get()
     |> handle_response()
   end
@@ -72,13 +78,19 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
       )
   end
 
-  @spec build_reverse_url(number(), number()) :: String.t()
-  defp build_reverse_url(lat, lon) do
+  @spec build_reverse_url(number(), number(), String.t()) :: String.t()
+  defp build_reverse_url(lat, lon, language) do
     # zoom: Level of detail required for the address
     # https://nominatim.org/release-docs/develop/api/Reverse/#example-with-formatjsonv2
     # set to zoom to neighborhood
-    params = encode(lat: lat, lon: lon, zoom: 10)
-    @reverse_url <> "&" <> params
+    @reverse_url <>
+      "&" <>
+      encode(
+        lat: lat,
+        lon: lon,
+        "accept-language": language,
+        zoom: 10
+      )
   end
 
   @spec handle_response({:ok, Req.Response.t()}) :: %{}
