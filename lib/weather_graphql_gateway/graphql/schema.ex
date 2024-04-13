@@ -36,14 +36,18 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
   query do
     @desc "Geocode"
     field :geocode, list_of(:geocode) do
+      @desc "Address query to geocode."
       arg(:query, non_null(:string))
+      @desc "Limit the maximum number of returned results. Cannot be more than 40. Defaults to 10"
       arg(:limit, :integer, default_value: 10)
       resolve(&Resolvers.Geocode.query/3)
     end
 
     @desc "Reverse geocode"
     field :reverse_geocode, :geocode do
+      @desc "The latitude of the coordinates to reverse geocode"
       arg(:latitude, non_null(:float))
+      @desc "The longitude of the coordinates to reverse geocode"
       arg(:longitude, non_null(:float))
       resolve(&Resolvers.ReverseGeocode.query/3)
     end
@@ -54,7 +58,6 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
       arg(:longitude, non_null(:float))
       @desc "The unit of measurement for precipitation. Defaults to inch. (mm/inch)"
       arg(:precipitation_unit, :precipitation_unit, default_value: :inch)
-
       @desc "The unit of measurement for temperature. Defaults to Fahrenheit. (celsius/fahrenheit)"
       arg(:temperature_unit, :temperature_unit, default_value: :fahrenheit)
       @desc "The unit of measurement for wind speed. Defaults to mph. (kmh, ms, mph, kn)"
