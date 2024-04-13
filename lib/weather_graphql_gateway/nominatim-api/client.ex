@@ -9,7 +9,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
   alias WeatherGraphqlGateway.NominatimAPI.Models.Geocode
 
   # https://nominatim.openstreetmap.org/search?<params>
-  @geocode_url "https://nominatim.openstreetmap.org/search?format=jsonv2&accept-language=en"
+  @geocode_url "https://nominatim.openstreetmap.org/search?format=jsonv2"
   @reverse_url "https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en"
 
   import Plug.Conn.Query
@@ -28,9 +28,13 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
   A map containing the geocoding information retrieved from the Nominatim API, or an exception if the request fails. The returned map may include keys like `lat`, `lon`, and other details depending on the API response.
   """
   @spec geocode(String.t()) :: [map()]
-  def geocode(query) do
+  def geocode(
+        query,
+        limit \\ 5,
+        language \\ "en"
+      ) do
     query
-    |> build_geocode_url()
+    |> build_geocode_url(limit, language)
     |> Req.get()
     |> handle_response()
   end
@@ -55,9 +59,15 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
     |> handle_response()
   end
 
-  @spec build_geocode_url(String.t()) :: String.t()
-  defp build_geocode_url(query) do
-    @geocode_url <> "&" <> encode(q: query)
+  @spec build_geocode_url(String.t(), integer(), String.t()) :: String.t()
+  defp build_geocode_url(query, limit, language) do
+    @geocode_url <>
+      "&" <>
+      encode(
+        q: query,
+        limit: limit,
+        "accept-language": language
+      )
   end
 
   @spec build_reverse_url(number(), number()) :: String.t()
