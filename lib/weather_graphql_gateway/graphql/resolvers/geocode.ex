@@ -9,11 +9,11 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.Geocode do
   """
   @spec query(
           any(),
-          %{:query => String.t()},
+          %{:query => String.t(), :limit => integer()},
           any()
         ) :: {:ok, any()}
-  def query(_parent, %{query: query}, _resolution) do
-    response = GraphqlAdapter.geocode(query)
+  def query(_parent, %{query: query, limit: limit}, _resolution) do
+    response = GraphqlAdapter.geocode(query, limit)
     {:ok, response}
   end
 end

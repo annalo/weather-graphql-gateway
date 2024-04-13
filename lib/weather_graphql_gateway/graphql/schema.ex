@@ -37,6 +37,7 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
     @desc "Geocode"
     field :geocode, list_of(:geocode) do
       arg(:query, non_null(:string))
+      arg(:limit, :integer, default_value: 10)
       resolve(&Resolvers.Geocode.query/3)
     end
 
