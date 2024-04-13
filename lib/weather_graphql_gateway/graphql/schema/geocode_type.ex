@@ -6,7 +6,7 @@ defmodule WeatherGraphqlGateway.Graphql.Schema.GeocodeType do
 
   object :geocode do
     @desc "Area of corner coordinates."
-    field(:boundingbox, list_of(:float), name: "boundingBox")
+    field(:boundingbox, list_of(:float))
     @desc "Full comma-separated address."
     field(:display_name, :string)
     @desc "Latitude of the centroid of the object."
