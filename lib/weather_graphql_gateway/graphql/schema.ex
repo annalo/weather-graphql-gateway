@@ -57,18 +57,17 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
   end
 
   query do
-    @desc "Geocode"
+    @desc "Geocode/Reverse Geocode source: Nominatim (https://nominatim.openstreetmap.org/) (search engine for OpenStreetMap data)"
     field :geocode, :geocode do
       resolve(&Resolvers.Geocode.get_data/3)
     end
 
-    @desc "Weather data"
+    @desc "Weather source: Open Meteo API (https://open-meteo.com/en/docs)"
     field :weather, :weather do
       arg(:latitude, non_null(:float))
       arg(:longitude, non_null(:float))
       @desc "The unit of measurement for precipitation. Defaults to inch. (mm/inch)"
       arg(:precipitation_unit, :precipitation_unit, default_value: :inch)
-
       @desc "The unit of measurement for temperature. Defaults to Fahrenheit. (celsius/fahrenheit)"
       arg(:temperature_unit, :temperature_unit, default_value: :fahrenheit)
       @desc "The unit of measurement for wind speed. Defaults to mph. (kmh, ms, mph, kn)"
