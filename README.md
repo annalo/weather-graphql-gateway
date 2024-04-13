@@ -42,16 +42,19 @@ query {
     }
   }
 
-  # Geocoding - query search to coordinates
-  geocode(query: "Taipei") {
-    latitude
-    longitude
-  }
+  # Geocode (NominatimAPI)
+  geocode {
+    # Geocoding - query search to coordinates
+    search(query: "Taipei") {
+      latitude
+      longitude
+    }
 
-  # Reverse geocoding - coordinates to location
-  reverseGeocode(latitude: 37.7749, longitude: -122.4194) {
-    name
-  }
+    # Reverse geocoding - coordinates to location
+    reverseGeocode(latitude: 37.7749, longitude: -122.4194) {
+      name
+    }
+  }  
 }
 ```
 
