@@ -30,7 +30,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
   @spec geocode(String.t()) :: [map()]
   def geocode(
         query,
-        limit \\ 5,
+        limit \\ 10,
         language \\ "en"
       ) do
     query

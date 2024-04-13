@@ -5,6 +5,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter do
   It provides functions to translate GraphQL queries into requests to the Nominatim and process the responses accordingly.
   """
   alias WeatherGraphqlGateway.NominatimAPI.Client
+  alias WeatherGraphqlGateway.NominatimAPI.Models.Geocode
 
   @doc """
   Fetches a list of geocode data for the search query from NominatimAPI.
@@ -17,8 +18,10 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter do
 
   A list of location results from the geocode query retrieved from the NominatimAPI.
   """
-  @spec geocode(String.t()) :: [map()]
-  def geocode(query), do: query |> Client.geocode()
+  @spec geocode(String.t()) :: [Geocode.t()]
+  def geocode(query), do: Client.geocode(query)
+  @spec geocode(String.t(), number()) :: [Geocode.t()]
+  def geocode(query, limit), do: Client.geocode(query, limit)
 
   @doc """
   Retrieves reverse geocode data from NominatimAPI.
