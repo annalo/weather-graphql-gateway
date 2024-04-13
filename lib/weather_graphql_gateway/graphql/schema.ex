@@ -1,29 +1,47 @@
 defmodule WeatherGraphqlGateway.Graphql.Schema do
   @moduledoc """
-  This module defines the GraphQL schema for fetching weather data.
+  This module defines the GraphQL schema for fetching geographic location (geocode) and weather data.
 
-  The schema provides queries for retrieving current, hourly, and daily weather data.
+  The schema provides the following queries:
 
-  ## Enums
-  - `:precipitation_unit`: Enum representing units for precipitation (mm, inch).
-  - `:temperature_unit`: Enum representing units for temperature (Celsius, Fahrenheit).
-  - `:wind_speed_unit`: Enum representing units for wind speed (km/h, m/s, mph, kn).
+  * **geocode**: Retrieves location information for a given search term.
+  * **weather**: Retrieves weather data for a specified latitude and longitude.
 
-  ## Objects
-  - `:current`: Current weather data.
-  - `:daily`: Daily weather data.
-  - `:hourly`: Hourly weather data.
-  - `:weather`: Weather data.
+  ## Geocode Query
 
-  ## Queries
-  - `weather`: Query for retrieving weather data.
+  The `geocode` query searches for locations based on a text input and provides various options to customize the results.
 
   ### Arguments
-    - `latitude`
-    - `longitude`
-    - `precipitation_unit`
-    - `temperature_unit`
-    - `wind_speed_unit`
+
+  * `search` (**required**, `string`): The text to search for locations.
+  * `limit` (optional, `integer`, defaults to `10`): The maximum number of locations to return (capped at 40).
+  * `language` (optional, `string`, defaults to `"en"`): The preferred language(s) for search results, comma-separated (e.g., `"en,de"`).
+
+  ## Reverse Geocode Query
+
+  The `reverse` field within the `geocode` object allows you to retrieve location information for a given pair of latitude and longitude coordinates.
+
+  ### Arguments
+
+  * `latitude` (**required**, `float`): The latitude coordinate.
+  * `longitude` (**required**, `float`): The longitude coordinate.
+
+  ## Weather Query
+
+  The `weather` query retrieves weather data for a specific location specified by latitude and longitude. It also allows you to customize the units used for various weather measurements.
+
+  ### Arguments
+
+  * `latitude` (**required**, `float`): The latitude coordinate.
+  * `longitude` (**required**, `float`): The longitude coordinate.
+  * `precipitation_unit` (optional, `precipitation_unit`, defaults to `"inch"`): The desired unit for precipitation (options: `"mm"`, `"inch"`).
+  * `temperature_unit` (optional, `temperature_unit`, defaults to `"fahrenheit"`): The desired unit for temperature (options: `"celsius"`, `"fahrenheit"`).
+  * `wind_speed_unit` (optional, `wind_speed_unit`, defaults to `"mph"`): The desired unit for wind speed (options: `"kmh"`, `"ms"`, `"mph"`, `"kn"`).
+
+  ## Data Sources
+
+  * **Geocode**: Nominatim (https://nominatim.openstreetmap.org)
+  * **Weather**: Open Meteo API (https://open-meteo.com/en/docs)
   """
   use Absinthe.Schema
   alias WeatherGraphqlGateway.Graphql.Resolvers
@@ -57,7 +75,7 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
   end
 
   query do
-    @desc "Geocode/Reverse Geocode source: Nominatim (https://nominatim.openstreetmap.org/) (search engine for OpenStreetMap data)"
+    @desc "Geocode/Reverse Geocode source: Nominatim (https://nominatim.openstreetmap.org) (search engine for OpenStreetMap data)"
     field :geocode, :geocode do
       resolve(&Resolvers.Geocode.get_data/3)
     end
@@ -68,6 +86,7 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
       arg(:longitude, non_null(:float))
       @desc "The unit of measurement for precipitation. Defaults to inch. (mm/inch)"
       arg(:precipitation_unit, :precipitation_unit, default_value: :inch)
+
       @desc "The unit of measurement for temperature. Defaults to Fahrenheit. (celsius/fahrenheit)"
       arg(:temperature_unit, :temperature_unit, default_value: :fahrenheit)
       @desc "The unit of measurement for wind speed. Defaults to mph. (kmh, ms, mph, kn)"
