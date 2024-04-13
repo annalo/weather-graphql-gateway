@@ -58,9 +58,6 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
       @desc "Limit the maximum number of returned results. Cannot be more than 40. Defaults to 10"
       arg(:limit, :integer, default_value: 10)
 
-      @desc "Preferred language order for showing search results. This may either be a simple comma-separated list of language codes. Defaults to 'en'."
-      arg(:language, :string, default_value: "en")
-
       resolve(&Resolvers.GeocodeSearch.query/3)
     end
 
@@ -77,6 +74,8 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
   query do
     @desc "Geocode/Reverse Geocode source: Nominatim (https://nominatim.openstreetmap.org) (search engine for OpenStreetMap data)"
     field :geocode, :geocode do
+      @desc "Preferred language order for showing search results. This may either be a simple comma-separated list of language codes. Defaults to 'en'."
+      arg(:language, :string, default_value: "en")
       resolve(&Resolvers.Geocode.get_data/3)
     end
 
@@ -86,7 +85,6 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
       arg(:longitude, non_null(:float))
       @desc "The unit of measurement for precipitation. Defaults to inch. (mm/inch)"
       arg(:precipitation_unit, :precipitation_unit, default_value: :inch)
-
       @desc "The unit of measurement for temperature. Defaults to Fahrenheit. (celsius/fahrenheit)"
       arg(:temperature_unit, :temperature_unit, default_value: :fahrenheit)
       @desc "The unit of measurement for wind speed. Defaults to mph. (kmh, ms, mph, kn)"

@@ -7,8 +7,8 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.GeocodeSearchTest do
     test "returns list of geocodes" do
       {:ok, resolution} =
         GeocodeSearch.query(
-          nil,
-          %{query: "Amsterdam", limit: 2, language: "en"},
+          %{language: "en"},
+          %{query: "Amsterdam", limit: 2},
           nil
         )
 
