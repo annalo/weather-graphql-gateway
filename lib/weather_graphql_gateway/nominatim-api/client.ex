@@ -74,10 +74,12 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
   defp handle_response({:ok, response}), do: response.body |> deserialize_response()
   defp handle_response({:error, exception}), do: exception
 
+  @spec deserialize_response([map()]) :: [Geocode.t()]
   defp deserialize_response(list) when is_list(list) do
     for object <- list, do: deserialize_response(object)
   end
 
+  @spec deserialize_response(map()) :: Geocode.t()
   defp deserialize_response(object) do
     %Geocode{
       boundingbox: object["boundingbox"] |> deserialize_boundingbox(),

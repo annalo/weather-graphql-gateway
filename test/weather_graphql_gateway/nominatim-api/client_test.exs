@@ -24,8 +24,8 @@ defmodule WeatherGraphqlGateway.NominatimAPI.ClientTest do
     test "reverse geocoding" do
       response =
         Client.reverse_geocode(%{
-          latitude: 25.0330,
-          longitude: 121.5654
+          lat: 25.0330,
+          lon: 121.5654
         })
 
       assert response.boundingbox == [25.0081697, 25.0495075, 121.5526148, 121.5922279]
