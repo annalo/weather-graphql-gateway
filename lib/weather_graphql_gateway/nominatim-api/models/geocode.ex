@@ -19,23 +19,30 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Models.Geocode do
     :lat,
     :lon,
     :name,
-    :place_rank,
+    :place_rank
   ]
   @type t :: %__MODULE__{
-    boundingbox: [number()],
-    display_name: String.t(),
+          address: %{
+            city: String.t(),
+            country: String.t(),
+            country_code: String.t(),
+            suburb: String.t()
+          },
+          boundingbox: [number()],
+          display_name: String.t(),
           lat: number(),
           lon: number(),
           name: String.t(),
-          place_rank: integer(),
+          place_rank: integer()
         }
 
   defstruct [
+    :address,
     :boundingbox,
     :display_name,
     :lat,
     :lon,
     :name,
-    :place_rank,
+    :place_rank
   ]
 end

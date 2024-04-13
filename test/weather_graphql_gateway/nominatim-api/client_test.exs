@@ -28,6 +28,13 @@ defmodule WeatherGraphqlGateway.NominatimAPI.ClientTest do
           lon: 121.5654
         })
 
+      assert response.address == %{
+               city: "Taipei",
+               country: "Taiwan",
+               country_code: "tw",
+               suburb: "Xinyi District"
+             }
+
       assert response.boundingbox == [25.0081697, 25.0495075, 121.5526148, 121.5922279]
       assert response.display_name == "Xinyi District, Taipei, Taiwan"
       assert response.lat == 25.0333448

@@ -3,9 +3,9 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlSerializer do
   Provides functions to serialize weather data received from OpenMeteoAPI responses.
 
   This module offers functionalities to transform weather data obtained from the OpenMeteoAPI into a format suitable for GraphQL responses. It includes functions to:
-    - Convert map keys to atoms (`atomize/1`)
-    - Serialize daily weather data (`serialize_daily_weather/1`)
-    - Serialize hourly weather data (`serialize_hourly_weather/1`)
+      * Convert map keys to atoms (`atomize/1`)
+      * Serialize daily weather data (`serialize_daily_weather/1`)
+      * Serialize hourly weather data (`serialize_hourly_weather/1`)
 
   """
 
@@ -19,9 +19,9 @@ defmodule WeatherGraphqlGateway.OpenMeteoAPI.GraphqlSerializer do
   end
 
   @doc """
-  Serializes daily weather data into a list of maps.
+    Serializes daily weather data into a list of maps.
 
-  This function takes a map containing daily weather data and transforms it into a list of maps, where each inner map represents the weather for a single day.
+    This function takes a map containing daily weather data and transforms it into a list of maps, where each inner map represents the weather for a single day.
   """
   @spec serialize_daily_weather(%{
           :precipitation_probability_max => integer(),
