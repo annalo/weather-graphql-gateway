@@ -15,8 +15,8 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.GeocodeTest do
       first = Enum.at(resolution, 0)
 
       assert first.name == "Amsterdam"
-      assert first.latitude == 52.3730796
-      assert first.longitude == 4.8924534
+      assert first.lat == 52.3730796
+      assert first.lon == 4.8924534
     end
   end
 end

@@ -102,6 +102,6 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
     response = json_response(conn, 200)
     geocode = response["data"]["reverse_geocode"]
 
-    assert geocode["name"] == "Taipei 101"
+    assert geocode["name"] == "Xinyi District"
   end
 end

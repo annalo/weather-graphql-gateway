@@ -43,14 +43,14 @@ query {
   }
 
   # Geocoding - query search to coordinates
-  geocode(address: "Taipei") {
+  geocode(query: "Taipei") {
     latitude
     longitude
   }
 
   # Reverse geocoding - coordinates to location
   reverseGeocode(latitude: 37.7749, longitude: -122.4194) {
-    address
+    name
   }
 }
 ```

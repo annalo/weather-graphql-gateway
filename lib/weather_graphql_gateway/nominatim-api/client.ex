@@ -17,7 +17,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
   @doc """
   Performs forward geocoding using the Nominatim Geocoding API.
 
-  This function takes a textual address as input and attempts to convert it into geographical coordinates (latitude and longitude). It utilizes the Nominatim API to retrieve the corresponding geocoding information.
+  This function takes a textual address as input and attempts to convert it into geographical coordinates (lat and lon). It utilizes the Nominatim API to retrieve the corresponding geocoding information.
 
   ## Arguments:
 
@@ -25,7 +25,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
 
   ## Returns:
 
-  A map containing the geocoding information retrieved from the Nominatim API, or an exception if the request fails. The returned map may include keys like `latitude`, `longitude`, and other details depending on the API response.
+  A map containing the geocoding information retrieved from the Nominatim API, or an exception if the request fails. The returned map may include keys like `lat`, `lon`, and other details depending on the API response.
   """
   @spec geocode(String.t()) :: [map()]
   def geocode(query) do
@@ -38,18 +38,18 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
   @doc """
   Performs reverse geocoding using the Nominatim Geocoding API.
 
-  This function takes a map containing latitude and longitude keys as input and attempts to convert those coordinates into a human-readable address. It utilizes the Nominatim API to retrieve the corresponding address details.
+  This function takes a map containing lat and lon keys as input and attempts to convert those coordinates into a human-readable address. It utilizes the Nominatim API to retrieve the corresponding address details.
 
   # Arguments
 
-    - `location` - A map with :latitude and :longitude keys representing the geographical coordinates to be reverse geocoded.
+    - `location` - A map with :lat and :lon keys representing the geographical coordinates to be reverse geocoded.
 
   # Returns
 
   A map containing the address details retrieved from the Nominatim API based on the provided coordinate.
   """
-  @spec reverse_geocode(%{latitude: number(), longitude: number()}) :: map()
-  def reverse_geocode(%{latitude: lat, longitude: lon}) do
+  @spec reverse_geocode(%{lat: number(), lon: number()}) :: map()
+  def reverse_geocode(%{lat: lat, lon: lon}) do
     build_reverse_url(lat, lon)
     |> Req.get()
     |> handle_response()
