@@ -22,6 +22,8 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter do
   def geocode(query), do: Client.geocode(query)
   @spec geocode(String.t(), number()) :: [Geocode.t()]
   def geocode(query, limit), do: Client.geocode(query, limit)
+  @spec geocode(String.t(), number(), String.t()) :: [Geocode.t()]
+  def geocode(query, limit, language), do: Client.geocode(query, limit, language)
 
   @doc """
   Retrieves reverse geocode data from NominatimAPI.
