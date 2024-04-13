@@ -35,7 +35,7 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
 
   object :geocode do
     field :search, list_of(:location) do
-      @desc "Address query to geocode."
+      @desc "The address query."
       arg(:query, non_null(:string))
       @desc "Limit the maximum number of returned results. Cannot be more than 40. Defaults to 10"
       arg(:limit, :integer, default_value: 10)
