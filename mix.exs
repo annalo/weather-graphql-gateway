@@ -40,13 +40,14 @@ defmodule WeatherGraphqlGateway.MixProject do
       GraphQL: [
         WeatherGraphqlGateway.Graphql.Schema,
         WeatherGraphqlGateway.Graphql.Schema.EnumTypes,
-        WeatherGraphqlGateway.Graphql.Schema.GeocodeTypes,
+        WeatherGraphqlGateway.Graphql.Schema.LocationType,
         WeatherGraphqlGateway.Graphql.Schema.WeatherTypes,
         WeatherGraphqlGateway.Graphql.Resolvers.Weather,
         WeatherGraphqlGateway.Graphql.Resolvers.CurrentWeather,
         WeatherGraphqlGateway.Graphql.Resolvers.DailyWeather,
         WeatherGraphqlGateway.Graphql.Resolvers.HourlyWeather,
         WeatherGraphqlGateway.Graphql.Resolvers.Geocode,
+        WeatherGraphqlGateway.Graphql.Resolvers.GeocodeSearch,
         WeatherGraphqlGateway.Graphql.Resolvers.ReverseGeocode
       ],
       "Nominatim API": [

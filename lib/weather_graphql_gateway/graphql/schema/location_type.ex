@@ -1,6 +1,18 @@
 defmodule WeatherGraphqlGateway.Graphql.Schema.LocationType do
   @moduledoc """
-  This module defines GraphQL object types representing different geocoding types.
+  This module defines a GraphQL object type representing a geographical location.
+
+  A `location` object represents a specific place on Earth and provides various details
+  for describing its position and identification.
+
+  ## Fields
+
+  - `boundingbox`: A list of floats representing the area defined by corner coordinates.
+  - `display_name`: The full human-readable address of the location (string).
+  - `lat`: The geographic latitude of the location's centroid in decimal degrees (float).
+  - `lon`: The geographic longitude of the location's centroid in decimal degrees (float).
+  - `name`: The name of the geographical feature (string).
+  - `place_rank`: A search ranking provided by the geocoder (integer).
   """
   use Absinthe.Schema.Notation
 

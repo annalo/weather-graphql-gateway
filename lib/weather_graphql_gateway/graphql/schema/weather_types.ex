@@ -1,17 +1,57 @@
 defmodule WeatherGraphqlGateway.Graphql.Schema.WeatherTypes do
   @moduledoc """
   This module defines GraphQL object types representing different weather data types.
+
+  ## Object Types
+
+  ### weather
+  - `latitude` (float)
+  - `longitude` (float)
+  - `precipitation_unit` (string)
+  - `temperature_unit` (string)
+  - `wind_speed_unit` (string)
+  - `current` (:current)
+  - `daily` (list_of(:daily))
+  - `hourly` (list_of(:hourly))
+
+  ### current
+  - `apparent_temperature` (float)
+  - `cloud_cover` (integer)
+  - `is_day` (integer)
+  - `precipitation` (float)
+  - `relative_humidity` (integer)
+  - `time` (string)
+  - `temperature` (float)
+  - `weather_code` (integer)
+  - `wind_speed` (float)
+
+  ### daily
+  - `precipitation_probability` (integer)
+  - `sunrise` (string)
+  - `sunset` (string)
+  - `temperature_max` (float)
+  - `temperature_min` (float)
+  - `date` (string)
+  - `weather_code` (integer)
+
+  ### hourly
+  - `is_day` (integer)
+  - `precipitation_probability` (integer)
+  - `temperature` (float)
+  - `time` (string)
+  - `weather_code` (integer)
   """
+
   use Absinthe.Schema.Notation
   alias WeatherGraphqlGateway.Graphql.Resolvers
 
-  # weather
   object :weather do
     field(:latitude, :float)
     field(:longitude, :float)
     field(:precipitation_unit, :string)
     field(:temperature_unit, :string)
     field(:wind_speed_unit, :string)
+
     @desc "Current weather data."
     field :current, :current do
       resolve(&Resolvers.CurrentWeather.get_data/3)
@@ -32,7 +72,6 @@ defmodule WeatherGraphqlGateway.Graphql.Schema.WeatherTypes do
     end
   end
 
-  # current weather
   object :current do
     @desc "Perceived feels-like temperature combining wind chill factor, relative humidity and solar radiation. (C/F)"
     field(:apparent_temperature, :float)
@@ -50,12 +89,10 @@ defmodule WeatherGraphqlGateway.Graphql.Schema.WeatherTypes do
     field(:temperature_2m, :float, name: "temperature")
     @desc "Weather condition as a numeric code. Follow WMO weather interpretation codes."
     field(:weather_code, :integer)
-
     @desc "The wind speed at 10 meters above ground level. 10 meters is the standard level. (km/h, mph, m/s, knots)"
     field(:wind_speed_10m, :float, name: "wind_speed")
   end
 
-  # daily weather
   object :daily do
     @desc "The precipitation probability (in percentage)."
     field(:precipitation_probability_max, :integer, name: "precipitation_probability")
@@ -73,7 +110,6 @@ defmodule WeatherGraphqlGateway.Graphql.Schema.WeatherTypes do
     field(:weather_code, :integer)
   end
 
-  # hourly weather
   object :hourly do
     @desc "1 if the current time step has daylight, 0 at night."
     field(:is_day, :integer)
