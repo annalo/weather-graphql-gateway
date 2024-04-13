@@ -82,7 +82,6 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
   @spec deserialize_response(map()) :: Geocode.t()
   defp deserialize_response(object) do
     %Geocode{
-      address: (object["address"] || %{}) |> serialize_address(),
       boundingbox: object["boundingbox"] |> deserialize_boundingbox(),
       display_name: object["display_name"],
       lat: object["lat"] |> String.to_float(),
@@ -91,17 +90,6 @@ defmodule WeatherGraphqlGateway.NominatimAPI.Client do
       place_rank: object["place_rank"]
     }
   end
-
-  defp serialize_address(address) when is_map(address) do
-    %{
-      city: address["city"],
-      country: address["country"],
-      country_code: address["country_code"],
-      suburb: address["suburb"]
-    }
-  end
-
-  defp serialize_address(address) when is_nil(address), do: nil
 
   defp deserialize_boundingbox(list), do: Enum.map(list, &String.to_float/1)
 end

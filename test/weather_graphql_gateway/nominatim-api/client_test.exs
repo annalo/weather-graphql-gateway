@@ -4,7 +4,7 @@ defmodule WeatherGraphqlGateway.NominatimAPI.ClientTest do
   alias WeatherGraphqlGateway.NominatimAPI.Client
 
   describe "Client.geocode/1" do
-    test "provide coordinates corresponding to a location" do
+    test "returns list of geocodes from the query" do
       response = Client.geocode("Copenhagen")
       first = Enum.at(response, 0)
 
@@ -27,13 +27,6 @@ defmodule WeatherGraphqlGateway.NominatimAPI.ClientTest do
           lat: 25.0330,
           lon: 121.5654
         })
-
-      assert response.address == %{
-               city: "Taipei",
-               country: "Taiwan",
-               country_code: "tw",
-               suburb: "Xinyi District"
-             }
 
       assert response.boundingbox == [25.0081697, 25.0495075, 121.5526148, 121.5922279]
       assert response.display_name == "Xinyi District, Taipei, Taiwan"

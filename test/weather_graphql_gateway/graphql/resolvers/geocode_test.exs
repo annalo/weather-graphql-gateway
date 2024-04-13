@@ -4,7 +4,7 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.GeocodeTest do
   alias WeatherGraphqlGateway.Graphql.Resolvers.Geocode
 
   describe "Geocode.query" do
-    test "returns list of geocode locations" do
+    test "returns list of geocodes" do
       {:ok, resolution} =
         Geocode.query(
           nil,
