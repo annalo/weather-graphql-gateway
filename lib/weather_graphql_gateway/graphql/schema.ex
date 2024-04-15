@@ -9,22 +9,25 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
 
   ## Geocode Query
 
-  The `geocode` query searches for locations based on a text input and provides various options to customize the results.
+  ### Search
 
-  ### Arguments
+  Searches for locations based on a address text input and various options to customize the results.
 
-  * `search` (**required**, `string`): The text to search for locations.
-  * `limit` (optional, `integer`, defaults to `10`): The maximum number of locations to return (capped at 40).
-  * `language` (optional, `string`, defaults to `"en"`): The preferred language(s) for search results, comma-separated (e.g., `"en,de"`).
+  #### Arguments
 
-  ## Reverse Geocode Query
+  * `query` (**required**, `string`): The address query to geocode.
+  * `language` (optional, `string`): The preferred language(s) for search results, comma-separated (e.g., `"en,de"`).
+  * `limit` (optional, `integer`): The maximum number of locations to return (capped at 40). Nominatim API defaults limit to 10.
 
-  The `reverse` field within the `geocode` object allows you to retrieve location information for a given pair of latitude and longitude coordinates.
+  ### Reverse Geocode Query
 
-  ### Arguments
+  Reverse geocodes a coordinate, with the option to set language.
+
+  #### Arguments
 
   * `latitude` (**required**, `float`): The latitude coordinate.
   * `longitude` (**required**, `float`): The longitude coordinate.
+  * `language` (optional, `string`): The preferred language(s) for search results, comma-separated (e.g., `"en,de"`).
 
   ## Weather Query
 
@@ -53,18 +56,18 @@ defmodule WeatherGraphqlGateway.Graphql.Schema do
 
   object :geocode do
     field :search, list_of(:location) do
-      @desc "The address query."
+      @desc "The address query to geocode."
       arg(:query, non_null(:string))
-      @desc "Limit the maximum number of returned results. Cannot be more than 40. Defaults to 10"
+      @desc "Limit the maximum number of returned results. Cannot be more than 40. Nominatim API defaults limit to 10."
       arg(:limit, :integer)
 
       resolve(&Resolvers.GeocodeSearch.query/3)
     end
 
     field :reverse, :location do
-      @desc "The latitude of the coordinates to reverse geocode"
+      @desc "The latitude of the coordinates to reverse geocode."
       arg(:latitude, non_null(:float))
-      @desc "The longitude of the coordinates to reverse geocode"
+      @desc "The longitude of the coordinates to reverse geocode."
       arg(:longitude, non_null(:float))
 
       resolve(&Resolvers.ReverseGeocode.query/3)
