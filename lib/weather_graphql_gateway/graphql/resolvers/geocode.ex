@@ -6,8 +6,11 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.Geocode do
   @doc """
   The `get_data` resolver returns the parameters to the child resolvers.
   """
-  @spec get_data(any(), %{language: String.t()}, any()) :: %{}
-  def get_data(_parent, %{language: language}, _resolution) do
-    {:ok, %{language: language}}
+  @spec get_data(any(), %{language: String.t() | nil}, any()) :: %{}
+  def get_data(_parent, args, _resolution) do
+    case Map.has_key?(args, :language) do
+      true -> {:ok, %{language: args.language}}
+      false -> {:ok, %{language: nil}}
+    end
   end
 end

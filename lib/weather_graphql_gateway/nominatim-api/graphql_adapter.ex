@@ -13,8 +13,8 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter do
   ## Parameters:
 
   - `query`: The address query.
+  - `language`: Preferred language order for showing search results. This may either be a simple comma-separated list of language codes.
   - `limit`: Limit the maximum number of returned results. Cannot be more than 40. Defaults to 10
-  - `language`: Preferred language order for showing search results. This may either be a simple comma-separated list of language codes. Defaults to 'en'.
 
   ## Returns:
 
@@ -41,7 +41,9 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter do
 
   ## Parameters:
 
-  - `coordinates` - A map with :lat and :lon keys representing the geographical coordinates to be reverse geocoded.
+    - `lat` - The latitude of a coordinate to be reversed geocoded.
+    - `lon` - The longitude of a coordinate to be reversed geocoded.
+    - `language`: Preferred language order for showing search results. This may either be a simple comma-separated list of language codes.
 
   ## Returns
 
