@@ -8,17 +8,17 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.GeocodeSearch do
   The `query` resolver returns the response from the geocode query.
   """
   @spec query(
-          %{:language => String.t()},
+          %{:language => String.t() | nil},
           %{
             :query => String.t(),
             :limit => integer()
           },
           any()
         ) :: {:ok, any()}
-  def query(%{language: language}, %{query: query, limit: limit}, _resolution) do
+  def query(%{language: language}, %{query: query} = args, _resolution) do
     response =
       GraphqlAdapter.geocode(query, %{
-        limit: limit,
+        limit: args[:limit] || nil,
         language: language
       })
 

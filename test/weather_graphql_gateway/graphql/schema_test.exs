@@ -32,8 +32,8 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
   """
 
   @geocode_query """
-  query geocode($query: String!) {
-    geocode {
+  query geocode($language: String, $query: String!) {
+    geocode(language: $language) {
       search(query: $query) {
         name
         latitude
@@ -84,6 +84,7 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
       post(conn, "/", %{
         "query" => @geocode_query,
         "variables" => %{
+          language: "en",
           query: "Taipei"
         }
       })
@@ -106,6 +107,6 @@ defmodule WeatherGraphqlGateway.Graphql.SchemaTest do
     response = json_response(conn, 200)
     geocode = response["data"]["geocode"]["reverse"]
 
-    assert geocode["name"] == "Xinyi District"
+    assert geocode["name"] == "信義區"
   end
 end

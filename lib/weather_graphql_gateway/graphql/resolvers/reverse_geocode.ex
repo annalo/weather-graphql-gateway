@@ -8,7 +8,7 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.ReverseGeocode do
   The `query` resolver returns the parameters to the child resolvers.
   """
   @spec query(
-          %{language: String.t()},
+          %{language: String.t()} | nil,
           %{:latitude => number(), :longitude => number()},
           any()
         ) :: {:ok, any()}
