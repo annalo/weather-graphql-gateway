@@ -19,5 +19,18 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.GeocodeSearchTest do
       assert first.lat == 52.3730796
       assert first.lon == 4.8924534
     end
+
+    test "can query with language param" do
+      {:ok, resolution} =
+        GeocodeSearch.query(
+          %{language: "zh-TW"},
+          %{query: "Taipei", limit: 2},
+          nil
+        )
+
+      first = Enum.at(resolution, 0)
+
+      assert first.name == "臺北市"
+    end
   end
 end

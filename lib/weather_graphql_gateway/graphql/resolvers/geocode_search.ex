@@ -16,7 +16,12 @@ defmodule WeatherGraphqlGateway.Graphql.Resolvers.GeocodeSearch do
           any()
         ) :: {:ok, any()}
   def query(%{language: language}, %{query: query, limit: limit}, _resolution) do
-    response = GraphqlAdapter.geocode(query, limit, language)
+    response =
+      GraphqlAdapter.geocode(query, %{
+        limit: limit,
+        language: language
+      })
+
     {:ok, response}
   end
 end
