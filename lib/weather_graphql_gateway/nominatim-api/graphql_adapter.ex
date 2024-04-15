@@ -20,12 +20,21 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter do
 
   A list of location results from the geocode query retrieved from the NominatimAPI.
   """
-  @spec geocode(String.t()) :: [Geocode.t()]
-  def geocode(query), do: Client.geocode(query)
-  @spec geocode(String.t(), number()) :: [Geocode.t()]
-  def geocode(query, limit), do: Client.geocode(query, limit)
-  @spec geocode(String.t(), number(), String.t()) :: [Geocode.t()]
-  def geocode(query, limit, language), do: Client.geocode(query, limit, language)
+  @spec geocode(
+          String.t(),
+          %{
+            language: String.t() | nil,
+            limit: number() | nil
+          }
+        ) :: [
+          Geocode.t()
+        ]
+  def geocode(
+        query,
+        %{language: language, limit: limit}
+      ) do
+    Client.geocode(query, %{language: language, limit: limit})
+  end
 
   @doc """
   Retrieves reverse geocode data from NominatimAPI.
@@ -38,12 +47,11 @@ defmodule WeatherGraphqlGateway.NominatimAPI.GraphqlAdapter do
 
   A map containing the address details retrieved from the Nominatim API based on the provided coordinates.
   """
-  @spec reverse_geocode(%{lat: number(), lon: number()}) :: map()
-  def reverse_geocode(%{lat: lat, lon: lon}) do
-    Client.reverse_geocode(%{lat: lat, lon: lon})
-  end
+  @spec reverse_geocode(number(), number()) :: map()
+  def reverse_geocode(lat, lon), do: Client.reverse_geocode(lat, lon)
 
-  def reverse_geocode(%{lat: lat, lon: lon}, language) do
-    Client.reverse_geocode(%{lat: lat, lon: lon}, language)
+  @spec reverse_geocode(number(), number(), String.t() | nil) :: map()
+  def reverse_geocode(lat, lon, language) do
+    Client.reverse_geocode(lat, lon, language)
   end
 end
